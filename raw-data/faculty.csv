@@ -56,9 +56,9 @@ Name,Title,gender,race,School,department
 "Becker, Anne",Maude and Lillian Presley Professor of Global Health and Social Medicine,F,White,FAS,ANTHRO
 "Bernstein, Anya",John L. Loeb Associate Professor of the Social Sciences,F,White,FAS,ANTHRO
 "Bestor, Theodore",Reischauer Institute Professor of Social Anthropology,M,White,FAS,ANTHRO
-"Carrasco, Davíd L.",Neil L. Rudenstine Professor for the Study of Latin Amer. in Fac. of Divinity/Arts and Sciences,M,White,FAS,ANTHRO
+"Carrasco, David",Neil L. Rudenstine Professor for the Study of Latin Amer. in Fac. of Divinity/Arts and Sciences,M,White,FAS,ANTHRO
 "Castaing-Taylor, Lucien",Professor of Visual Arts and of Anthropology,M,White,FAS,ANTHRO
-"Caton, Steven C.",Khalid Bin Abdullah Bin Abdulrahman Al Saud Professor of Contemporary Arab Studies,M,White,FAS,ANTHRO
+"Caton, Steven",Khalid Bin Abdullah Bin Abdulrahman Al Saud Professor of Contemporary Arab Studies,M,White,FAS,ANTHRO
 "Camaroff, Jean",Alfred North Whitehead Professor of African and African American Studies and of Anthropology,F,White,FAS,ANTHRO
 "Camaroff, John",Hugh K. Foster Professor of African and African American Studies and of Anthropology,M,White,FAS,ANTHRO
 "Der Manuelian, Peter",Barbara Bell Professor of Egyptology,M,White,FAS,ANTHRO
@@ -165,7 +165,7 @@ Name,Title,gender,race,School,department
 "Engell, James",Gurney Professor of English Literature and Professor of Comparative Literature,M,White,FAS,COMPLIT
 "Giron, Luis",Professor of Romance Languages and Literatures and of Comparative Literature,M,White,FAS,COMPLIT
 "Goldberg, Rita",Lecturer in Comparative Literature,F,White,FAS,COMPLIT
-"Hamilton, John T.","William R. Kenan, Jr. Professor of Comparative Literature and of Germanic Languages and Literatures",M,White,FAS,COMPLIT
+"Hamilton, John","William R. Kenan, Jr. Professor of Comparative Literature and of Germanic Languages and Literatures",M,White,FAS,COMPLIT
 "Leafgren, Luke",Lecturer on Comparative Literature,M,White,FAS,COMPLIT
 "Lienau, Annette",Assistant Professor of Comparative Literature,F,White,FAS,COMPLIT
 "Lionnet, Francoise","Professor of Romance Languages and Literatures, Comparative Literature, African and African American Studies in Residence, and Women, Gender and Sexuality",F,White,FAS,COMPLIT
@@ -215,7 +215,7 @@ Name,Title,gender,race,School,department
 "Wordsworth, Robin","Associate Professor of Environmental Science and Engineering, Affiliated Faculty Member of Earth and Planetary Sciences",M,White,FAS,EPS
 "Abe, Ryuichi",Reischauer Institute Professor of Japanese Religions,M,Asian,FAS,EALC
 "Atherton, David",Assistant Professor of East Asian Languages and Civilizations,M,White,FAS,EALC
-"Bol, Peter K.",Charles H. Carswell Professor of East Asian Languages and Civilizations,M,White,FAS,EALC
+"Bol, Peter",Charles H. Carswell Professor of East Asian Languages and Civilizations,M,White,FAS,EALC
 "Cai, Jing",Interim Preceptor in Chinese,F,Asian,FAS,EALC
 "Chen, Xiaocheng",Drill Instructor in Chinese,F,Asian,FAS,EALC
 "Cranston, Edwin",Professor of Japanese Literature,M,White,FAS,EALC
@@ -243,13 +243,13 @@ Name,Title,gender,race,School,department
 "Li, Jie",John L. Loeb Associate Professor of the Humanities,F,Asian,FAS,EALC
 "Li, Wai-yee",1879 Professor of Chinese Literature,F,Asian,FAS,EALC
 "Liu, Jennifer Li-Chia",Professor of the Practice in Language Pedagogy and Director of the Chinese Language Program,F,Asian,FAS,EALC
-"McCormick, Melissa M.",Professor of Japanese Art and Culture,F,White,FAS,EALC
+"McCormick, Melissa",Professor of Japanese Art and Culture,F,White,FAS,EALC
 "Miura, takuma",Drill Instructor in Japanese,M,Asian,FAS,EALC
 "Miyagawa, Miki",Drill Instructor in Japanese,F,Asian,FAS,EALC
 "Ngo, Binh",Senior Preceptor in Vietnamese and Director of the Vietnamese Program,M,Asian,FAS,EALC
 "Noh, Ahsil",Drill Instructor in Korean,F,Asian,FAS,EALC
 "Park, Si Nae",Associate Professor of East Asian Languages and Civilizations,F,Asian,FAS,EALC
-"Puett, Michael J.",Walter C. Klein Professor of Chinese History,M,White,FAS,EALC
+"Puett, Michael",Walter C. Klein Professor of Chinese History,M,White,FAS,EALC
 "Robson, James",James C. Kralik and Yunli Lou Professor of East Asian Languages and Civilizations,M,White,FAS,EALC
 "Sena, David",Preceptor in East Asian Languages and Civilizations,M,White,FAS,EALC
 "Shao, Xueyin",Preceptor in East Asian Languages and Civilizations,F,Asian,FAS,EALC
@@ -305,11 +305,11 @@ Name,Title,gender,race,School,department
 "Laibson, David",Robert I. Goldman Professor of Economics,M,White,FAS,ECON
 "Lee, Robin",Professor of Economics,M,Asian,FAS,ECON
 "Li, Shengwu",Assistant Professor of Economics,M,Asian,FAS,ECON
-"Mankiw, N.",Robert M. Beren Professor of Economics,M,White,FAS,ECON
+"Mankiw, Gregory",Robert M. Beren Professor of Economics,M,White,FAS,ECON
 "Marglin, Stephen",Walter S. Barker Professor of Economics,M,White,FAS,ECON
 "Maskin, Eric",Adams University Professor,M,White,FAS,ECON
 "Melitz, Marc",David A. Wells Professor of Political Economy,M,White,FAS,ECON
-"Miron, Jeffrey A.",Senior Lecturer on Economics,M,White,FAS,ECON
+"Miron, Jeffrey",Senior Lecturer on Economics,M,White,FAS,ECON
 "Nunn, Nathan",Frederic E. Abbe Professor of Economics,M,White,FAS,ECON
 "Pakes, Ariel",Thomas Professor of Economics,M,White,FAS,ECON
 "Pallais, Amanda",Professor of Economics,F,White,FAS,ECON
@@ -320,7 +320,7 @@ Name,Title,gender,race,School,department
 "Shleifer, Andrei",John L. Loeb Professor of Economics,M,White,FAS,ECON
 "Stantcheva, Stefanie",Professor of Economics,F,White,FAS,ECON
 "Stein, Jeremy",Moise Y. Safra Professor of Economics,M,White,FAS,ECON
-"Stock, James H.",Harold Hitchings Burbank Professor of Political Economy,M,White,FAS,ECON
+"Stock, James",Harold Hitchings Burbank Professor of Political Economy,M,White,FAS,ECON
 "Straub, Ludwig",Assistant Professor of Economics,M,White,FAS,ECON
 "Strzalecki, Tomasz",Professor of Economics,M,White,FAS,ECON
 "Summers, Lawrence",Charles W. Eliot University Professor,M,White,FAS,ECON
@@ -394,7 +394,7 @@ Name,Title,gender,race,School,department
 "Nagy, Gregory","Francis Jones Professor of Classical Greek Literature, Professor of Comparative Literature",M,White,FAS,FOLKMYTH
 "Nagy, Joseph",Henry L. Shattuck Professor of Irish Studies,M,White,FAS,FOLKMYTH
 "Patton, Kimberley",Professor of the Comparative and Historical Study of Religion,F,White,FAS,FOLKMYTH
-"Puett, Michael J.",Walter C. Klein Professor of Chinese History,M,White,FAS,FOLKMYTH
+"Puett, Michael",Walter C. Klein Professor of Chinese History,M,White,FAS,FOLKMYTH
 "Roilos, Panagiotis",George Seferis Professor of Modern Greek Studies,M,White,FAS,FOLKMYTH
 "Shelemay, Kay",G. Gordon Watts Professor of Music,F,White,FAS,FOLKMYTH
 "Stauffer, John",Sumner R. and Marshall S. Kates Professor of English and of African and African American Studies,M,White,FAS,FOLKMYTH
@@ -504,7 +504,7 @@ Name,Title,gender,race,School,department
 "McCormick, Michael",Francis Goelet Professor of Medieval History,M,White,FAS,HIST
 "McGirr, Lisa",Professor of History,F,White,FAS,HIST
 "Miles, Tiya",Professor of History,F,African American,FAS,HIST
-"Miller, Ian J.",Professor of History,M,White,FAS,HIST
+"Miller, Ian",Professor of History,M,White,FAS,HIST
 "Najmabadi, Afsaneh","Francis Lee Higginson Professor of History and of Studies of Women, Gender, and Sexuality",F,White,FAS,HIST
 "Penslar, Derek",William Lee Frost Professor of Jewish History,M,White,FAS,HIST
 "Plokhii, Serhii",Mykhailo S. Hrushevs'kyi Professor of Ukrainian History,M,White,FAS,HIST
@@ -615,7 +615,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Charnavel, Isabelle",Associate Professor of Linguistics,F,White,FAS,LING
 "Chierchia, Gennaro",Haas Foundations Professor of Linguistics,M,White,FAS,LING
 "Davidson, Kathryn",Assistant Professor of Linguistics,F,White,FAS,LING
-"Huang, C.-T. James",Professor of Linguistics,M,Asian,FAS,LING
+"Huang, James",Professor of Linguistics,M,Asian,FAS,LING
 "Jasanoff, Jay",Diebold Professor of Indo-European Linguistics and Philology,M,White,FAS,LING
 "Rau, Jeremy",Professor of Linguistics and of the Classics,M,White,FAS,LING
 "Ryan, Kevin",Professor of Linguistics,M,White,FAS,LING
@@ -631,7 +631,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Collins, Voula",Preceptor in Mathematics,F,White,FAS,MATH
 "Cuenca, Cesar",Benjamin Peirce Fellow,M,White,FAS,MATH
 "Demers, Matthew",Preceptor in Mathematics,M,White,FAS,MATH
-"Elkies, Noam D.",Professor of Mathematics,M,White,FAS,MATH
+"Elkies, Noam",Professor of Mathematics,M,White,FAS,MATH
 "Elmanto, Elden",Benjamin Peirce Fellow,M,Asian,FAS,MATH
 "Freund, David",Preceptor in Mathematics,M,White,FAS,MATH
 "Gaitsgory, Dennis",Herchel Smith Professor of Mathematics,M,White,FAS,MATH
@@ -641,7 +641,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Grundmeier, Dusty",Associate Senior Lecturer on Mathematics,M,White,FAS,MATH
 "Guerra, Jill",Preceptor in Mathematics,F,White,FAS,MATH
 "Gundlach, Fabian",Benjamin Peirce Fellow,M,White,FAS,MATH
-"Harris, Joseph D.",Higgins Professor of Mathematics,M,White,FAS,MATH
+"Harris, Joseph",Higgins Professor of Mathematics,M,White,FAS,MATH
 "Hironaka, Erika",Lecturer,F,Asian,FAS,MATH
 "Hopkins, Michael",George Putnam Professor of Pure and Applied Mathematics,M,White,FAS,MATH
 "Junkins, Caroline",Preceptor in Mathematics,F,White,FAS,MATH
@@ -667,7 +667,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Vasey, Sebastien",Benjamin Peirce Fellow,M,White,FAS,MATH
 "Walker, Hakim",Preceptor in Mathematics,M,African American,FAS,MATH
 "Williams, Lauren",Dwight Parker Robinson Professor of Mathematics,F,White,FAS,MATH
-"Woodin, W. Hugh",Professor of Mathematics and of Philosophy,M,White,FAS,MATH
+"Woodin, Hugh",Professor of Mathematics and of Philosophy,M,White,FAS,MATH
 "Wu, Tianqi",Lecturer in Math,M,Asian,FAS,MATH
 "Yau, Horng-Tzer",Merton Professor of Mathematics,M,Asian,FAS,MATH
 "Yau, Shing-Tung",William Caspar Graustein Professor of Mathematics and Professor of Physics,M,Asian,FAS,MATH
@@ -697,7 +697,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Kahne, Daniel",Higgins Professor of Chemistry and Chemical Biology and of Molecular and Cellular Biology,M,White,FAS,MCBIO
 "Kleckner, Nancy",Herchel Smith Professor of Molecular Biology,F,White,FAS,MCBIO
 "Kunes, Sam",Professor of Molecular and Cellular Biology,M,White,FAS,MCBIO
-"Lichtman, Jeff W.",Jeremy R. Knowles Professor of Molecular and Cellular Biology,M,White,FAS,MCBIO
+"Lichtman, Jeff",Jeremy R. Knowles Professor of Molecular and Cellular Biology,M,White,FAS,MCBIO
 "Liu, Jessica",Preceptor in Molecular and Cellular Biology,F,Asian,FAS,MCBIO
 "Losick, Richard",Maria Moors Cabot Professor of Biology,M,White,FAS,MCBIO
 "Lue, Robert",Professor of the Practice of Molecular and Cellular Biology,M,Asian,FAS,MCBIO
@@ -823,7 +823,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Schouten, Regina",Assistant Professor of Philosophy,F,White,FAS,PHIL
 "Sen, Amartya",Thomas W. Lamont University Professor,M,Asian,FAS,PHIL
 "Shelby, Tommie",Caldwell Titcomb Professor of African and African American Studies and of Philosophy,M,African American,FAS,PHIL
-"Siegel, Susanna C.",Edgar Pierce Professor of Philosophy,F,White,FAS,PHIL
+"Siegel, Susanna",Edgar Pierce Professor of Philosophy,F,White,FAS,PHIL
 "Simmons, Alison",Samuel H. Wolcott Professor of Philosophy,F,White,FAS,PHIL
 "Stanczyk, Lucas",Assistant Professor of Philosophy,M,White,FAS,PHIL
 "Arguelles, Carlos",Assistant Professor of Physics,M,White,FAS,PHY
@@ -935,7 +935,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Hardacre, Helen",Reischauer Institute Professor of Japanese Religions and Society,F,White,FAS,RELI
 "Harris, Jay",Harry Austryn Wolfson Professor of Jewish Studies,M,White,FAS,RELI
 "Hempton, David","Dean of the Faculty of Divinity, Alonzo L. McDonald Family Professor of Evangelical Theological Studies",M,White,FAS,RELI
-"Higginbotham, Evelyn Brooks",Victor S. Thomas Professor of History and of African and African American Studies,F,African American,FAS,RELI
+"Higginbotham, Evelyn",Victor S. Thomas Professor of History and of African and African American Studies,F,African American,FAS,RELI
 "Hollywood, Amy",Elizabeth H. Monrad Professor of Christian Studies,F,White,FAS,RELI
 "Johansen, Baber",Professor of Islamic Religious Studies,M,White,FAS,RELI
 "Jordan, Mark",Andrew W. Mellon Professor of Christian Thought,M,White,FAS,RELI
@@ -961,7 +961,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Sanchez, Michelle",Assistant Professor of Theology,F,White,FAS,RELI
 "Schussler Fiorenza, Elisabeth",Krister Stendahl Professor of Divinity,F,White,FAS,RELI
 "Stand, Charles",Professor of Early Christian thought,M,White,FAS,RELI
-"Teeter, D. Andrew",Professor of Hebrew Bible,M,White,FAS,RELI
+"Teeter, Andrew",Professor of Hebrew Bible,M,White,FAS,RELI
 "Thomas, Todne",Assistance Professor of African American Religions,F,African American,FAS,RELI
 "Watson, Nicholas",Henry B. and Anne M. Cabot Professor of English Literature,M,White,FAS,RELI
 "Zeghal, Malika",Prince Alwaleed Bin Talal Professor in Contemporary Islamic Thought and Life,F,White,FAS,RELI
@@ -997,7 +997,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Vega-Duran, Raquel",Senior Lecturer in Peninsular and Transatlantic Film and Literature,F,White,FAS,ROMANCE
 "Baranczak, Anna",Preceptor in Slavic Languages and Literatures,F,White,FAS,SLAV
 "Bolton, Jonathan",Professor of Slavic Languages and Literatures,M,White,FAS,SLAV
-"Buckler, Julie A.",Samuel Hazzard Cross Professor of Slavic Languages and Literatures,F,White,FAS,SLAV
+"Buckler, Julie",Samuel Hazzard Cross Professor of Slavic Languages and Literatures,F,White,FAS,SLAV
 "Chirkov, Natalia",Preceptor in Slavic Languages and Literatures,F,White,FAS,SLAV
 "Clancy, Steven",Senior Lecturer on Slavic Languages and Literatures and Director of the Slavic Language Program,M,White,FAS,SLAV
 "Dibrova, Volodymyr",Preceptor in Slavic Languages and Literatures,M,White,FAS,SLAV
@@ -1101,15 +1101,15 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Jacob, Pierre",Associate Professor of Statistics,M,White,FAS,STAT
 "Janson, Lucas",Assistant professor of Statistics,M,White,FAS,STAT
 "Ke, Zheng",Assistant Professor of Statistics,F,Asian,FAS,STAT
-"Kou, S. C. Samuel",Professor of Statistics,M,Asian,FAS,STAT
+"Kou, Samuel",Professor of Statistics,M,Asian,FAS,STAT
 "Lin, Xihong",Professor of Biostatistics,F,Asian,FAS,STAT
 "Liu, Jun",Professor of Statistics,M,Asian,FAS,STAT
-"Liu, Xiaole (Shirley)",Professor of Statistics,F,Asian,FAS,STAT
+"Liu, Xiaole",Professor of Statistics,F,Asian,FAS,STAT
 "Meng, Xiao-Li",Whipple V.N. Jones Professor of Statistics,M,Asian,FAS,STAT
 "Murphy, Susan",Professor of Statistics and of Computer Science,F,White,FAS,STAT
 "Parzen, Michael",Senior Lecturer on Statistics,M,White,FAS,STAT
 "Pillai, Natesh",Professor of Statistics,M,Asian,FAS,STAT
-"Rader, Kevin A.",Senior Preceptor,M,White,FAS,STAT
+"Rader, Kevin",Senior Preceptor,M,White,FAS,STAT
 "Sen, Subhabrata",Assistant Professor of Statistics,M,Asian,FAS,STAT
 "Shephard, Neil","Frank B. Baird, Jr. Professor of Science",M,Asian,FAS,STAT
 "Vu, Julie",Preceptor in Statistics,F,Asian,FAS,STAT
@@ -1274,7 +1274,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Lakkaraju, Hima",Assistant Professor,F,Asian,HBS,HBS
 "Lal, Rajiv","Stanley Roth, Sr. Professor of Retailing",M,Asian,HBS,HBS
 "Lassiter, Joseph","Senator John Heinz Professor of Management Practice in Environmental Management, Retired",M,White,HBS,HBS
-"Leonard, Herman B.","George F Baker, Jr Professor of Public Management in the John F Kennedy School of Government",M,White,HBS,HBS
+"Leonard, Herman","George F Baker, Jr Professor of Public Management in the John F Kennedy School of Government",M,White,HBS,HBS
 "Lerner, Josh",Jacob H. Schiff Professor of Investment Banking,M,White,HBS,HBS
 "Leschly, Stig",Senior Lecturer,M,White,HBS,HBS
 "Lorsch, Jay",Louis E. Kirstein Professor of Human Relations,M,White,HBS,HBS
@@ -1567,7 +1567,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Bazzana, Giovanni",Professor of New Testament,M,White,HDS,GSD
 "Braude, Ann",Senior Lecturer on American Religious History and Director of the Women's Studies in Religion Program,F,White,HDS,GSD
 "Brekus, Catherine",Charles Warren Professor of the History of Religion in America,F,White,HDS,GSD
-"Carrasco, Davíd L.",Neil L. Rudenstine Professor for the Study of Latin Amer. in Fac. of Divinity/Arts and Sciences,M,White,HDS,GSD
+"Carrasco, David",Neil L. Rudenstine Professor for the Study of Latin Amer. in Fac. of Divinity/Arts and Sciences,M,White,HDS,GSD
 "Click, Emily",Lectecter on Ministry Studies,F,White,HDS,GSD
 "Clooney, Francis",Parkman Professor of Divinity and Professor of Comparative Theology,M,White,HDS,GSD
 "Fiorenza, Francis",Charles Chauncey Stillman Professor of Roman Catholic Theological Studies,M,White,HDS,GSD
@@ -1653,13 +1653,13 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Long, Bridget",Saris Professor of Education and Economics,F,African American,GSE,GSD
 "Mapp, Karen",Senior Lecturer on Education,F,African American,GSE,GSD
 "Mason, Pamela",Senior Lecturer on Education,F,African American,GSE,GSD
-"McCarthy, Timothy Patrick",Lecturer on Education,M,White,GSE,GSD
+"McCarthy, Timothy",Lecturer on Education,M,White,GSE,GSD
 "McCoy, Dana",Assistant Professor of Education,F,White,GSE,GSD
 "McGowan, Eileen",Lecturer on Education,F,White,GSE,GSD
 "McIntyre, Joseph",Lecturer on Education,M,White,GSE,GSD
 "McLaughlin, Judith",Senior Lecturer on Education,F,White,GSE,GSD
 "Mehta, Jal",Professor of Education,M,White,GSE,GSD
-"Merseth, Katherine K.","Lecturer (Annual), Part-time",F,White,GSE,GSD
+"Merseth, Katherine","Lecturer (Annual), Part-time",F,White,GSE,GSD
 "Miller, Matthew",Senior Lecturer on Education and Associate Dean for Learning and Teaching,M,White,GSE,GSD
 "Miratrix, Luke",Assistant Professor of Education,M,White,GSE,GSD
 "Nelson, Charles",Professor of Pediatrics,M,White,GSE,GSD
@@ -1668,7 +1668,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Purcell, Francesca",Senior Lecturer,F,White,GSE,GSD
 "Reimers, Fernando",Ford Foundation Professor of Practice in International Education,M,White,GSE,GSD
 "Reuben, Julie",Charles Warren Professor of the History of American Education,F,White,GSE,GSD
-"Reville, S.",Francis Keppel Professor of Practice of Educational Policy and Administration,M,White,GSE,GSD
+"Reville, Stephen",Francis Keppel Professor of Practice of Educational Policy and Administration,M,White,GSE,GSD
 "Rieser, Katherine",Lecturer on Education,F,White,GSE,GSD
 "Rose, Todd",Lecturer on Education,M,White,GSE,GSD
 "Rowe, Meredith",Professor of Education,F,White,GSE,GSD
@@ -1746,7 +1746,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Kohler, Eddie",Microsoft Professor of Computer Science,M,White,SEAS,COMPSCI
 "Kung, H.T.",William H. Gates Professor of Computer Science and Electrical Engineering and Vinton Hayes Senior Research Fellow in Electrical Engineering,M,Asian,SEAS,COMPSCI
 "Lewis, Harry",Gordon McKay Professor of Computer Science,M,White,SEAS,COMPSCI
-"Lloyd, Douglas Richard",Preceptor,M,White,SEAS,COMPSCI
+"Lloyd, Douglas",Preceptor,M,White,SEAS,COMPSCI
 "Malan, David",Gordon McKay Professor of the Practice of Computer Science,M,White,SEAS,COMPSCI
 "Mickens, James",Gordon McKay Professor of Computer Science,M,African American,SEAS,COMPSCI
 "Mitzenmacher, Michael","Thomas J. Watson, Sr. Professor of Computer Science",M,White,SEAS,COMPSCI
@@ -1777,14 +1777,14 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Zickler, Todd",William and Ami Kuan Danoff Professor of Electrical Engineering and Computer Science,M,White,SEAS,EE
 "Anderson, James",Philip S. Weld Professor of Atmospheric Chemistry,M,White,SEAS,ESE
 "Farrell, Brian",Robert P. Burden Professor of Meteorology,M,White,SEAS,ESE
-"Holbrook, Noel Michele",Charles Bullard Professor of Forestry; Affiliate in Environmental Science & Engineering,F,White,SEAS,ESE
+"Holbrook, Noel",Charles Bullard Professor of Forestry; Affiliate in Environmental Science & Engineering,F,White,SEAS,ESE
 "Holdren, John ",Teresa and John Heinz Professor of Environmental Policy; Affiliate in Environmental Science & Engineering,M,White,SEAS,ESE
 "Huybers, Peter",Professor of Earth and Planetary Sciences and of Environmental Science and Engineering,M,White,SEAS,ESE
 "Jacob, Daniel",Vasco McCoy Family Professor of Atmospheric Chemistry and Environmental Engineering,M,White,SEAS,ESE
 "Keith, David",Gordon McKay Professor of Applied Physics,M,White,SEAS,ESE
 "Keutsch, Frank",Stonington Professor of Engineering and Atmospheric Science and Professor of Chemistry and Chemical Biology,M,White,SEAS,ESE
 "Kuang, Zhiming",Gordon McKay Professor of Atmospheric and Environmental Science,M,White,SEAS,ESE
-"Linz, Marianna Katherine",Assistant Professor of Environmental Science and Engineering and of Earth and Planetary Sciences,F,White,SEAS,ESE
+"Linz, Marianna",Assistant Professor of Environmental Science and Engineering and of Earth and Planetary Sciences,F,White,SEAS,ESE
 "Martin, Scot",Gordon McKay Professor of Environmental Science and Engineering and Professor of Earth and Planetary Sciences,M,White,SEAS,ESE
 "McColl, Kaighin",Assistant Professor of Earth and Planetary Sciences and of Environmental Science and Engineering,M,White,SEAS,ESE
 "KcElroy, Michael",Gilbert Butler Professor of Environmental Studies,M,White,SEAS,ESE
@@ -1884,7 +1884,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Kotowski, Maciej",Associate Professor of Public Policy,M,White,HKS,HKS
 "Lawrence, Robert",Albert L Williams Professor of International Trade and Investment,M,White,HKS,HKS
 "Lee, Henry",Senior Lecturer in Public Policy,M,White,HKS,HKS
-"Leonard, Herman B. (Dutch)","George F Baker, Jr Professor of Public Management in the John F Kennedy School of Government",M,White,HKS,HKS
+"Leonard, Herman","George F Baker, Jr Professor of Public Management in the John F Kennedy School of Government",M,White,HKS,HKS
 "Lerner, Jennifer","Thornton Bradshaw Professor of Public Policy, Decision Science, and Management",M,White,HKS,HKS
 "Levy, Dan",Senior Lecturer in Public Policy at the John F. Kennedy School of Governmen,M,White,HKS,HKS
 "Liebman, Jeffrey",Malcolm Wiener Professor of Public Policy at the John F. Kennedy School of Government,M,White,HKS,HKS
@@ -2135,7 +2135,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Adelman, Karen",Professor of Biological Chemistry and Molecular Pharmacology,F,White,HMS,BCMP
 "Arthanari, Haribabu",Assistant Professor of Biological Chemistry and Molecular Pharmacology,M,Asian,HMS,BCMP
 "Bender, Welcome",Harold T. White Professor of Biological Chemistry and Molecular Pharmacology,M,White,HMS,BCMP
-"Blacklow, Stephen Charles",Gustavus Adolphus Pfeiffer Professor of Biological Chemistry and Molecular Pharmacology,M,White,HMS,BCMP
+"Blacklow, Stephen",Gustavus Adolphus Pfeiffer Professor of Biological Chemistry and Molecular Pharmacology,M,White,HMS,BCMP
 "Brown, Alan",Assistant Professor of Biological Chemistry and Molecular Pharmacology,M,White,HMS,BCMP
 "Buhrlage, Sara",Assistant Professor of Biological Chemistry and Molecular Pharmacology,F,White,HMS,BCMP
 "Buratowski, Stephen",Professor of Biological Chemistry and Molecular Pharmacology,M,White,HMS,BCMP
@@ -2162,7 +2162,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Loparo, Joseph John",Associate Professor of Biological Chemistry and Molecular Pharmacology,M,White,HMS,BCMP
 "Namchuk, Mark",Executive Director of Therapeutics Translation,M,White,HMS,BCMP
 "Roberts, Thomas McCoy",Professor of Biological Chemistry and Molecular Pharmacology,M,White,HMS,BCMP
-"Shamu, Caroline Elizabeth",Assistant Professor of Radiology,F,White,HMS,BCMP
+"Shamu, Caroline",Assistant Professor of Radiology,F,White,HMS,BCMP
 "Shih, William",Professor of Biological Chemistry and Molecular Pharmacology,M,Asian,HMS,BCMP
 "Sliz, Piotr",Associate Professor of Pediatrics,M,White,HMS,BCMP
 "Springer, Timothy Alan",Latham Family Professor of Biological Chemistry and Molecular Pharmacology,M,White,HMS,BCMP
@@ -2226,7 +2226,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Yuan, Junying",Elizabeth D. Hay Professor of Cell Biology,F,Asian,HMS,CELLBIO
 "Alt, Ferderick",Charles A. Janeway Professor of Pediatrics,M,White,HMS,GENE
 "Benz, Edward","Richard and Susan Smith Distinguished Professor of Medicine, Dana-Farber Cancer Institute",M,White,HMS,GENE
-"Blackwell, T. Keitch","Professor of Genetics, Joslin Diabetes Center",M,White,HMS,GENE
+"Blackwell, Keitch","Professor of Genetics, Joslin Diabetes Center",M,White,HMS,GENE
 "Blower, Michael","Associate Professor of Genetics, Massachusetts General Hospital",M,White,HMS,GENE
 "Cepko, Constance","Bullard Professor of Genetics and Neuroscience, Harvard Medical School",F,White,HMS,GENE
 "Chao, Luke",Assistant Professor of Genetics,M,Asian,HMS,GENE
@@ -2264,19 +2264,19 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Seidman, Jonathan",Henrietta B. and Frederick H. Bugher Foundation Professor of Genetics,M,White,HMS,GENE
 "Sheen, Jen",Professor of Genetics,F,White,HMS,GENE
 "Sicinski, Peter",Professor of Genetics,M,White,HMS,GENE
-"Sinclair, David Andrew",Professor of Genetics,M,White,HMS,GENE
+"Sinclair, David",Professor of Genetics,M,White,HMS,GENE
 "Subramanian, Radhika",Assistant Professor of Genetics,F,Asian,HMS,GENE
 "Szostak, Jack William",Assistant Professor of Genetics,M,White,HMS,GENE
 "Tabin, Clifford",George Jacob and Jacqueline Hazel Leder Professor of Genetics,M,White,HMS,GENE
 "Vidal, Mark",Professor of Genetics,M,White,HMS,GENE
 "Warman, Matthew",Professor of Genetics,M,White,HMS,GENE
-"Winston, Fred Marshall",ohn Emory Andrus Professor of Genetics,M,White,HMS,GENE
+"Winston, Fred ",John Emory Andrus Professor of Genetics,M,White,HMS,GENE
 "Wu, Chao-ting",Professor of Genetics,F,Asian,HMS,GENE
 "Yankner, Bruce",Professor of Genetics,M,White,HMS,GENE
 "Zhang, Yi","Fred S. Rosen Professor of Pediatrics, Professor of Genetics",M,Asian,HMS,GENE
 "Atun, Rifat",Professor of Global Health Systems and a Department of Global Health and Social Medicine Affiliate,M,Asian,HMS,GHSM
 "Becerra, Mercedes Corina",Professor of Global Health and Social Medicine,F,White,HMS,GHSM
-"Becker, Anne Edith",Maude and Lillian Presley Professor of Global Health and Social Medicine,F,White,HMS,GHSM
+"Becker, Anne",Maude and Lillian Presley Professor of Global Health and Social Medicine,F,White,HMS,GHSM
 "Berkowitz, Aaron Lee",Assistant Professor of Neurology,M,White,HMS,GHSM
 "Bitton, Asaf",Assistant Professor of Medicine and an Affiliate with the Department of Global Health and Social Medicine,M,White,HMS,GHSM
 "Bonds, Matthew",Assistant Professor of Global Health and Social Medicine,M,White,HMS,GHSM
@@ -2285,7 +2285,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Dohlman, Lena",Assistant Professor of Anaesthesia and Department of Global Health and Social Medicine Affiliate,F,White,HMS,GHSM
 "Duda, Rosemary",Associate Professor of Surgery and Department of Global Health and Social Medicine Affiliate,F,White,HMS,GHSM
 "Fagenholz, Peter Jackson",Assistant Professor of Surgery and Department of Global Health and Social Medicine Affiliate,M,White,HMS,GHSM
-"Farmer, Paul Edward",Kolokotrones University Professor of Global Health and Social Medicine,M,White,HMS,GHSM
+"Farmer, Paul",Kolokotrones University Professor of Global Health and Social Medicine,M,White,HMS,GHSM
 "Franke, Molly",Associate Professor of Global Health and Social Medicine,F,White,HMS,GHSM
 "Gone, Joseph Patrick",Professor of Global Health and Social Medicine,M,White,HMS,GHSM
 "Hedt-Gauthier, Bethany",Associate Professor of Global Health and Social Medicine,F,White,HMS,GHSM
@@ -2317,7 +2317,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Keating, Nancy","Professor of Health Care Policy, Department of Health Care Policy, Harvard Medical School; Professor of Medicine and Practicing General Internist, Brigham and Women's Hospital",F,White,HMS,HCP
 "Kessler, Ronald","McNeil Family Professor of Health Care Policy, Department of Health Care Policy, Harvard Medical School",M,White,HMS,HCP
 "Landon, Bruce","Professor of Health Care Policy, Department of Health Care Policy, Harvard Medical School; Professor of Medicine and Practicing Internist, Beth Israel Deaconess Medical Center",M,White,HMS,HCP
-"Landrum, Mary Beth","Professor of Health Care Policy, Department of Health Care Policy, Harvard Medical School",F,White,HMS,HCP
+"Landrum, Mary","Professor of Health Care Policy, Department of Health Care Policy, Harvard Medical School",F,White,HMS,HCP
 "Layton, Timothy","Assistant Professor of Health Care Policy, Department of Health Care Policy, Harvard Medical School",M,White,HMS,HCP
 "Maestas, Nicole","Associate Professor of Health Care Policy, Department of Health Care Policy, Harvard Medical School",F,White,HMS,HCP
 "McGuire, Thomas","Professor of Health Economics, Department of Health Care Policy, Harvard Medical School",M,White,HMS,HCP
@@ -2335,7 +2335,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Born, Richard",Professor of Neurobiology,M,White,HMS,NEURO
 "Cardozo, David",Assitant Professor of Neurobiology,M,White,HMS,NEURO
 "Cohen, Jonathan",Bullard Professor of Neurobiology,M,White,HMS,NEURO
-"Datta, Sandeep Robert",AssociateProfessor of Neurobiology,M,Asian,HMS,NEURO
+"Datta, Sandeep",AssociateProfessor of Neurobiology,M,Asian,HMS,NEURO
 "Drugowitsch, Jan",Assistant Professor of Neurobiology,M,White,HMS,NEURO
 "Fishell, gordon",Professor of Neurobiology,M,White,HMS,NEURO
 "Ginty, David",Lefler Professor of Neurobiology,M,White,HMS,NEURO
@@ -2561,7 +2561,7 @@ Kazlas,Associate Professor of Ophthalmology,F,White,HMS,OPTHA
 "Lee, Kyu Ha",Assistant Professor of Integrative Genomic Epidemiology,M,Asian,HSPH,BIOSTAT
 "Liang, Liming",Associate Professor of Statistical Genetics,M,Asian,HSPH,BIOSTAT
 "Lin, Xihong",Professor of Biostatistics,F,Asian,HSPH,BIOSTAT
-"Liu, Xiaole (Shirley)",Professor of Statistics,F,Asian,HSPH,BIOSTAT
+"Liu, Xiaole",Professor of Statistics,F,Asian,HSPH,BIOSTAT
 "Lu, Junwei",Assistant Professor of Biostatistics,M,Asian,HSPH,BIOSTAT
 "Michor, Franziska",Professor of Computational Biology,F,White,HSPH,BIOSTAT
 "Miller, Jeffrey",Assistant Professor of Biostatistics,M,White,HSPH,BIOSTAT
@@ -2826,7 +2826,7 @@ Kazlas,Associate Professor of Ophthalmology,F,White,HMS,OPTHA
 "Sen, Amartya",Thomas W. Lamont University Professor,M,Asian,UNIVERSITY,UNIVERSITY
 "Shapiro, Irwin",Timken University Professor,M,White,UNIVERSITY,UNIVERSITY
 "Singer, Judith",James Bryant Conant Professor of Education,M,White,UNIVERSITY,UNIVERSITY
-"Summers, Lawrence H.",Charles W. Eliot University Professor,M,White,UNIVERSITY,UNIVERSITY
+"Summers, Lawrence",Charles W. Eliot University Professor,M,White,UNIVERSITY,UNIVERSITY
 "Tribe, Laurence",The Carl M. Loeb University Professor,M,White,UNIVERSITY,UNIVERSITY
 "Whitesides, George",Woodford L. and Ann A. Flowers University Professor,M,White,UNIVERSITY,UNIVERSITY
 "Bacow, Lawrence",President of harvard,M,White,UNIVERSITY,ADMIN
