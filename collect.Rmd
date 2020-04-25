@@ -14,22 +14,37 @@ library(janitor)
 
 ```{r import}
 
+# importing the data from the faculty, which I grabbed online from departmental
+# websites, as well as reading in the correct column types.
+
 raw_faculty <- read_csv("raw-data/faculty.csv", col_types = "ccffcc") %>%
   clean_names()
 
-raw_fec <- read_csv("raw-data/fec.csv", col_types = "ccicdccicffcccccccccccccciccccccccTddcccccccccccccccccccccccfcccccccccdcccccccc")
+# reading in the FEC data (which used a bulk search on the term "harvard",
+# including the correct column types)
+raw_fec <- read_csv("raw-data/fec.csv", 
+                    col_types = "ccicdccicffcccccccccccccciccccccccTddcccccccccccccccccccccccfcccccccccdcccccccc")
+
+# cleaning up the faculty data: I first split the names into a full name, which
+# I then split into a last name and a first name. I also did a bunch of error
+# checking, since some people did in fact go by both names, or some people used
+# their middle names instead of their first names. I then selected out the
+# information that wasn't necessary.
 
 clean_faculty <- raw_faculty %>%
-  mutate(full_name = map(name, ~ unlist(strsplit(., ","))),
-         last_name = map(full_name, ~.[1]),
-         first_name = map(full_name, ~.[2]))
+  mutate(
+    full_name = map(name, ~ unlist(strsplit(., ","))),
+    last_name = map(full_name, ~ .[1]),
+    full_first_name = map(full_name, ~ .[2])
+  ) %>%
+  mutate(first_split = map(full_first_name, ~ unlist(strsplit(., "\ ")))) %>%
+  mutate(first_name = map(first_split, ~ .[2]))
 
-[[1]][1]
   
-# used for error checking on last names
-#  mutate(last_split = map(last_name, ~ unlist(strsplit(., "\ ")))) %>%
-#  mutate(last2 = map(last_split, ~ .[2])) %>%
-#  filter(!is.na(last2))
+# used for error checking on last names to see if anyone has two last names
+# mutate(last_split = map(last_name, ~ unlist(strsplit(., "\ ")))) %>%
+# mutate(last2 = map(last_split, ~ .[2])) %>%
+# filter(!is.na(last2))
 
 clean_faculty %>%
   filter(last_name %in% " ")
