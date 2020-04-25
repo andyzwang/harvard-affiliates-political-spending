@@ -1,0 +1,42 @@
+---
+title: "Harvard's Politics"
+author: "Andy Wang"
+date: "4/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(stringr)
+library(janitor)
+```
+
+```{r import}
+
+raw_faculty <- read_csv("raw-data/faculty.csv", col_types = "ccffcc") %>%
+  clean_names()
+
+raw_fec <- read_csv("raw-data/fec.csv", col_types = "ccicdccicffcccccccccccccciccccccccTddcccccccccccccccccccccccfcccccccccdcccccccc")
+
+clean_faculty <- raw_faculty %>%
+  mutate(full_name = map(name, ~ unlist(strsplit(., ","))),
+         last_name = map(full_name, ~.[1]),
+         first_name = map(full_name, ~.[2]))
+
+[[1]][1]
+  
+# used for error checking on last names
+#  mutate(last_split = map(last_name, ~ unlist(strsplit(., "\ ")))) %>%
+#  mutate(last2 = map(last_split, ~ .[2])) %>%
+#  filter(!is.na(last2))
+
+clean_faculty %>%
+  filter(last_name %in% " ")
+```
+
+```{r}
+x <- c("apple", "banana", "pear")
+str_view(x, "an")
+```
+
