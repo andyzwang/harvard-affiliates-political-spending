@@ -264,20 +264,20 @@ subject_field_data <- faculty_fec %>%
   ungroup() %>%
   arrange(desc(donations_sum)) %>%
   mutate(field = case_when(
-    school =="SEAS" ~ "Engineering",
-    department %in% c("AAAS", "ANTHRO", "ECON", "GOV", "HIST","PSCH","SOCSTUD","SOCIO","WGS") ~ "Social Sciences",
-    department %in% c("ASTRO", "CHEM", "EPS","HISTSCI","HEBIO","MATH","MCBIO","OEBIO","PHY","STAT","STRBIO") ~ "Math/Science",
-    department %in% c("CELTIC", "CLASSICS", "COMPLIT", "EALC", "ENG", "FOLKMYTH", "GERM", "HISTLIT","HAA","LING","MUSIC","NELC","PHIL","RELI","ROMANCE","SLAV","SAS") ~ "Humanities",
-    department == "ADMIN" ~"Admin"
+    school == "SEAS" ~ "Engineering",
+    department %in% c("AAAS", "ANTHRO", "ECON", "GOV", "HIST", "PSCH", "SOCSTUD", "SOCIO", "WGS") ~ "Social Sciences",
+    department %in% c("ASTRO", "CHEM", "EPS", "HISTSCI", "HEBIO", "MATH", "MCBIO", "OEBIO", "PHY", "STAT", "STRBIO", "ESPP") ~ "Math/Science",
+    department %in% c("CELTIC", "CLASSICS", "COMPLIT", "EALC", "ENG", "FOLKMYTH", "GERM", "HISTLIT", "HAA", "LING", "MUSIC", "NELC", "PHIL", "RELI", "ROMANCE", "SLAV", "SAS") ~ "Humanities",
+    department == "ADMIN" ~ "Admin"
   ))
-  
+
 department_spending <- subject_field_data %>%
   distinct(name, department, .keep_all = T) %>%
   group_by(department) %>%
   summarize(mean_donation = mean(donations_sum))
 
 ggplot(department_spending, aes(x = department, y = mean_donation)) +
-  geom_col() + 
+  geom_col() +
   coord_flip()
 
 ggplot(subject_field_data, aes(x = department, y = donations_sum, color = gender)) +
@@ -292,5 +292,219 @@ ggplot(subject_spending, aes(x = field, y = donations_sum, color = gender)) +
   geom_jitter(width = .1, height = .25) +
   coord_flip() +
   scale_y_log10(labels = scales::dollar)
-  
+
+spending_by_subject <- subject_spending %>%
+  group_by(field) %>%
+  summarize(mean_spending = mean(donations_sum)) %>%
+  arrange(desc(mean_spending))
+
+field_race_gender_model <- lm(
+  donations_sum ~ gender * race + field,
+  subject_spending
+) %>%
+  tidy(conf.int = T)
+```
+
+```{r diversity}
+diverse_faculty <- faculty_fec %>%
+  mutate(name = paste(last_name, ", ", first_name, sep = "")) %>%
+  mutate(white_man = case_when(
+    gender == "M" & race == "White" ~ TRUE,
+    gender != "M" ~ FALSE,
+    race != "White" ~ FALSE
+  )) %>%
+  mutate(white = case_when(
+    race == "White" ~ TRUE,
+    race != "White" ~ FALSE
+  )) %>%
+  select(white_man, everything())
+
+# Working on University level
+diversity_donations_uni <- diverse_faculty %>%
+  group_by(name, title, school, white_man, white, race, gender) %>%
+  summarize(donations_sum = sum(contribution_receipt_amount)) %>%
+  ungroup() %>%
+  arrange(desc(donations_sum)) %>%
+  distinct(name, school, .keep_all = T)
+
+donations_diversity_per_school <- diversity_donations_uni %>%
+  arrange(school) %>%
+  group_by(school) %>%
+  nest() %>%
+  mutate(
+    white_man = map(data, ~ sum(.$white_man)),
+    white = map(data, ~ sum(.$white)),
+    n = map_dbl(data, nrow),
+    non_white_man_percent = 100 * (1 - (as.numeric(white_man) / n)),
+    non_white_percent = 100 * (1 - (as.numeric(white) / n)),
+    mean_donation = as.numeric(map(data, ~ mean(.$donations_sum)))
+  ) %>%
+  select(school, non_white_man_percent, non_white_percent, mean_donation, data)
+
+ggplot(donations_diversity_per_school, aes(x = non_white_percent, y = mean_donation)) +
+  geom_point() +
+  geom_smooth(method = "glm", se = F)
+ggplot(donations_diversity_per_school, aes(x = non_white_man_percent, y = mean_donation)) +
+  geom_point() +
+  geom_smooth(method = "glm", se = F)
+
+demographics_school <- diversity_donations_uni %>%
+  mutate(
+    asian_man = case_when(
+      race == "Asian" & gender == "M" ~ TRUE,
+      race != "Asian" | gender != "M" ~ FALSE
+    ),
+    asian_woman = case_when(
+      race == "Asian" & gender == "F" ~ TRUE,
+      race != "Asian" | gender != "F" ~ FALSE
+    ),
+    black_woman = case_when(
+      race == "African American" & gender == "F" ~ TRUE,
+      race != "African American" | gender != "F" ~ FALSE
+    ),
+    black_man = case_when(
+      race == "African American" & gender == "M" ~ TRUE,
+      race != "African American" | gender != "M" ~ FALSE
+    ),
+    white_woman = case_when(
+      race == "White" & gender == "F" ~ TRUE,
+      race != "White" | gender != "F" ~ FALSE
+    )
+  ) %>%
+  group_by(school) %>%
+  nest() %>%
+  mutate(
+    n = map_dbl(data, nrow),
+    white_man = as.numeric(map(data, ~ sum(.$white_man))) / n,
+    white_woman = as.numeric(map(data, ~ sum(.$white_woman))) / n,
+    asian_man = as.numeric(map(data, ~ sum(.$asian_man))) / n,
+    asian_woman = as.numeric(map(data, ~ sum(.$asian_woman))) / n,
+    black_man = as.numeric(map(data, ~ sum(.$black_man))) / n,
+    black_woman = as.numeric(map(data, ~ sum(.$black_woman))) / n,
+    mean_donation = as.numeric(map(data, ~ mean(.$donations_sum)))
+  )
+
+# Now on FAS Level
+diversity_donations_fas <- diverse_faculty %>%
+  filter(school %in% c("FAS", "SEAS")) %>%
+  group_by(name, title, school, gender, race, department, white_man, white) %>%
+  summarize(donations_sum = sum(contribution_receipt_amount)) %>%
+  ungroup() %>%
+  arrange(desc(donations_sum)) %>%
+  mutate(field = case_when(
+    school == "SEAS" ~ "Engineering",
+    department %in% c("AAAS", "ANTHRO", "ECON", "GOV", "HIST", "PSCH", "SOCSTUD", "SOCIO", "WGS") ~ "Social Sciences",
+    department %in% c("ASTRO", "CHEM", "EPS", "HISTSCI", "HEBIO", "MATH", "MCBIO", "OEBIO", "PHY", "STAT", "STRBIO", "ESPP") ~ "Math/Science",
+    department %in% c("CELTIC", "CLASSICS", "COMPLIT", "EALC", "ENG", "FOLKMYTH", "GERM", "HISTLIT", "HAA", "LING", "MUSIC", "NELC", "PHIL", "RELI", "ROMANCE", "SLAV", "SAS") ~ "Humanities",
+    department == "ADMIN" ~ "Admin"
+  ))
+
+donations_diversity_per_field <- diversity_donations_fas %>%
+  distinct(name, field, .keep_all = T) %>%
+  arrange(field) %>%
+  group_by(field) %>%
+  nest() %>%
+  mutate(
+    white_man = map(data, ~ sum(.$white_man)),
+    white = map(data, ~ sum(.$white)),
+    n = map_dbl(data, nrow),
+    non_white_man_percent = 100 * (1 - (as.numeric(white_man) / n)),
+    non_white_percent = 100 * (1 - (as.numeric(white) / n)),
+    mean_donation = as.numeric(map(data, ~ mean(.$donations_sum)))
+  ) %>%
+  select(field, non_white_man_percent, non_white_percent, mean_donation, data)
+
+demographics_fas <- diversity_donations_fas %>%
+  mutate(
+    asian_man = case_when(
+      race == "Asian" & gender == "M" ~ TRUE,
+      race != "Asian" | gender != "M" ~ FALSE
+    ),
+    asian_woman = case_when(
+      race == "Asian" & gender == "F" ~ TRUE,
+      race != "Asian" | gender != "F" ~ FALSE
+    ),
+    black_woman = case_when(
+      race == "African American" & gender == "F" ~ TRUE,
+      race != "African American" | gender != "F" ~ FALSE
+    ),
+    black_man = case_when(
+      race == "African American" & gender == "M" ~ TRUE,
+      race != "African American" | gender != "M" ~ FALSE
+    ),
+    white_woman = case_when(
+      race == "White" & gender == "F" ~ TRUE,
+      race != "White" | gender != "F" ~ FALSE
+    )
+  ) %>%
+  group_by(field) %>%
+  nest() %>%
+  mutate(
+    n = map_dbl(data, nrow),
+    white_man = as.numeric(map(data, ~ sum(.$white_man))) / n,
+    white_woman = as.numeric(map(data, ~ sum(.$white_woman))) / n,
+    asian_man = as.numeric(map(data, ~ sum(.$asian_man))) / n,
+    asian_woman = as.numeric(map(data, ~ sum(.$asian_woman))) / n,
+    black_man = as.numeric(map(data, ~ sum(.$black_man))) / n,
+    black_woman = as.numeric(map(data, ~ sum(.$black_woman))) / n,
+    mean_donation = as.numeric(map(data, ~ mean(.$donations_sum)))
+  )
+
+## Now on individual subject level
+donations_diversity_per_subject <- diversity_donations_fas %>%
+  distinct(name, department, .keep_all = T) %>%
+  arrange(department) %>%
+  group_by(department) %>%
+  nest() %>%
+  mutate(
+    white_man = map(data, ~ sum(.$white_man)),
+    white = map(data, ~ sum(.$white)),
+    n = map_dbl(data, nrow),
+    non_white_man_percent = 100 * (1 - (as.numeric(white_man) / n)),
+    non_white_percent = 100 * (1 - (as.numeric(white) / n)),
+    mean_donation = as.numeric(map(data, ~ mean(.$donations_sum)))
+  ) %>%
+  select(department, non_white_man_percent, non_white_percent, mean_donation, data)
+ggplot(donations_diversity_per_subject, aes(x = non_white_percent, y = mean_donation)) +
+  geom_point() +
+  geom_smooth(method = "glm", se = F)
+ggplot(donations_diversity_per_subject, aes(x = non_white_man_percent, y = mean_donation)) +
+  geom_point() +
+  geom_smooth(method = "glm", se = F)
+
+demographics_departments <- diversity_donations_fas %>%
+  mutate(
+    asian_man = case_when(
+      race == "Asian" & gender == "M" ~ TRUE,
+      race != "Asian" | gender != "M" ~ FALSE
+    ),
+    asian_woman = case_when(
+      race == "Asian" & gender == "F" ~ TRUE,
+      race != "Asian" | gender != "F" ~ FALSE
+    ),
+    black_woman = case_when(
+      race == "African American" & gender == "F" ~ TRUE,
+      race != "African American" | gender != "F" ~ FALSE
+    ),
+    black_man = case_when(
+      race == "African American" & gender == "M" ~ TRUE,
+      race != "African American" | gender != "M" ~ FALSE
+    ),
+    white_woman = case_when(
+      race == "White" & gender == "F" ~ TRUE,
+      race != "White" | gender != "F" ~ FALSE
+    )
+  ) %>%
+  group_by(department) %>%
+  nest() %>%
+  mutate(
+    n = map_dbl(data, nrow),
+    white_man = as.numeric(map(data, ~ sum(.$white_man))) / n,
+    white_woman = as.numeric(map(data, ~ sum(.$white_woman))) / n,
+    asian_man = as.numeric(map(data, ~ sum(.$asian_man))) / n,
+    asian_woman = as.numeric(map(data, ~ sum(.$asian_woman))) / n,
+    black_man = as.numeric(map(data, ~ sum(.$black_man))) / n,
+    black_woman = as.numeric(map(data, ~ sum(.$black_woman))) / n,
+    mean_donation = as.numeric(map(data, ~ mean(.$donations_sum)))
+  )
 ```
