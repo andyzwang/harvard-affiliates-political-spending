@@ -7,9 +7,14 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)
 library(stringr)
 library(janitor)
+library(ggplot2)
+library(usmap)
+library(lubridate)
+library(ggthemes)
+library(broom)
+library(tidyverse)
 ```
 
 ```{r import}
@@ -22,7 +27,7 @@ faculty <- read_csv("raw-data/faculty.csv", col_types = "ccffcc") %>%
 
 # reading in the FEC data (which used a bulk search on the term "harvard",
 # including the correct column types)
-fec <- read_csv("raw-data/fec.csv",
+fec <- read_csv("raw-data/fec1720.csv",
   col_types = "ccicdccicffcccccccccccccciccccccccTddcccccccccccccccccccccccfcccccccccdcccccccc"
 )
 
@@ -78,6 +83,16 @@ fec <- fec %>%
   select(last_name, first_name, everything())
 ```
 
+```{r committeesdata}
+committees <- read_delim("raw-data/committees1920.txt",
+  "|",
+  escape_double = FALSE, col_names = TRUE,
+  trim_ws = TRUE
+) %>%
+  clean_names() %>%
+  mutate(committee_id = cmte_id)
+```
+
 ```{r joining}
 
 # created the master of all tables with this data, merging on first and last.
@@ -86,16 +101,161 @@ faculty_fec <- left_join(faculty, fec,
   by = c("first_name", "last_name")
 ) %>%
   mutate(contribution_receipt_amount = coalesce(contribution_receipt_amount, 0))
+```
+
+```{r individualdonations}
+
+# accounting for individual donations: summarizing based on each individual.
+# Creating a new column called name, based on the paste function; summarizing
+# receipts, and then looking for distinct names.
 
 individual_donations <- faculty_fec %>%
   filter(contribution_receipt_amount != 0) %>%
-  group_by(first_name, last_name, title, school, department) %>%
+  mutate(name = paste(last_name, ", ", first_name, sep = "")) %>%
+  group_by(name, title, school, department) %>%
+  summarize(donations_sum = sum(contribution_receipt_amount)) %>%
+  ungroup() %>%
+  arrange(desc(donations_sum)) %>%
+  distinct(name, .keep_all = T)
+
+mean_donation_donaters <- individual_donations %>%
+  summarize(mean_donation = mean(donations_sum))
+```
+
+```{r recipients}
+
+# first, filtering by name and transaction number to ensure that we don't double
+# count people who are in two departments. Then, summarizing based on recieving
+# committee name.
+
+donation_recipients <- faculty_fec %>%
+  mutate(name = paste(last_name, ", ", first_name, sep = "")) %>%
+  distinct(name, pdf_url, .keep_all = T) %>%
+  filter(contribution_receipt_amount != 0) %>%
+  group_by(committee_name, committee_id) %>%
   summarize(donations_sum = sum(contribution_receipt_amount)) %>%
   arrange(desc(donations_sum))
 
-donation_recipients <- faculty_fec %>%
-  filter(contribution_receipt_amount != 0) %>%
-  group_by(committee_name) %>%
-  summarize(donations_sum = sum(contribution_receipt_amount)) %>%
-  arrange(desc(donations_sum))
+
+# joining with committee table
+
+recipients_committees <- left_join(donation_recipients,
+  committees,
+  by = "committee_id"
+) %>%
+  select(-cmte_id, -cmte_nm)
+
+
+# grouping by party and summarizing
+
+parties <- recipients_committees %>%
+  group_by(cmte_pty_affiliation) %>%
+  summarize(total_donations = sum(donations_sum)) %>%
+  filter(!is.na(cmte_pty_affiliation)) %>%
+  arrange(desc(total_donations))
+
+# summarizing by states
+
+states <- recipients_committees %>%
+  mutate(state = cmte_st) %>%
+  group_by(state) %>%
+  summarize(total_donations = sum(donations_sum)) %>%
+  arrange(desc(total_donations))
 ```
+
+```{r heatmap}
+
+# making a heatmap using plot_usmap
+
+plot_usmap(data = states, values = "total_donations") +
+  scale_fill_continuous(
+    low = "white", high = "blue",
+    name = "Dollars Donated", label = scales::dollar
+  ) +
+  theme(legend.position = "right") +
+  labs(
+    title = "States Recieving Harvard Donations",
+    subtitle = "Using FEC Data from 2017-2020"
+  )
+```
+
+```{r overtime}
+
+# filtering for unique name / donation id (again to discount people in two
+# departments), then mutating to create a month variable. From there,
+# summarizing per month
+
+donations_over_time <- faculty_fec %>%
+  mutate(name = paste(last_name, ", ", first_name, sep = "")) %>%
+  distinct(name, pdf_url, .keep_all = T) %>%
+  mutate(month = floor_date(contribution_receipt_date, "month")) %>%
+  filter(!is.na(contribution_receipt_amount)) %>%
+  group_by(month) %>%
+  summarize(donations = sum(contribution_receipt_amount))
+
+# plotting donations over time with ggplot
+
+ggplot(donations_over_time, aes(x = month, y = donations)) +
+  geom_line() +
+  labs(
+    x = "Date",
+    y = "Total Donations",
+    title = "Total Harvard Donations Per Month"
+  ) +
+  theme_classic() +
+  scale_y_continuous(label = scales::dollar)
+```
+
+```{r GRSmodel}
+gender_race_school_data <- faculty_fec %>%
+  mutate(name = paste(last_name, ", ", first_name, sep = "")) %>%
+  group_by(name, title, school, gender, race) %>%
+  summarize(donations_sum = sum(contribution_receipt_amount)) %>%
+  ungroup() %>%
+  arrange(desc(donations_sum)) %>%
+  distinct(name, .keep_all = T)
+
+mean_donation_all <- gender_race_school_data %>%
+  summarize(mean_donation = mean(donations_sum))
+
+gender_breakdown <- gender_race_school_data %>%
+  group_by(gender) %>%
+  summarize(mean_donation = mean(donations_sum))
+  
+race_breakdown <- gender_race_school_data %>%
+  group_by(race) %>%
+  summarize(mean_donation = mean(donations_sum))
+
+school_breakdown <- gender_race_school_data %>%
+  group_by(school) %>%
+  summarize(mean_donation = mean(donations_sum)) %>%
+  arrange(desc(mean_donation))
+
+race_gender_breakdown <- gender_race_school_data %>%
+  group_by(race, gender) %>%
+  summarize(mean_donation = mean(donations_sum))%>%
+  arrange(desc(mean_donation))
+
+ggplot(gender_race_school_data, aes(x = race, y = donations_sum, color = gender)) +
+  geom_jitter(width = .25, height = .1) +
+  scale_y_continuous(labels = scales::dollar)
+
+ggplot(gender_race_school_data, aes(x = school, y = donations_sum, color = gender)) +
+  geom_jitter(width = .25, height = .1) +
+  scale_y_continuous(labels = scales::dollar)
+
+gender_race_school_model <- lm(donations_sum ~ gender*race + school, gender_race_school_data) %>%
+  tidy(conf.int = T)
+```
+
+```{r engineering}
+subject_field_data <- faculty_fec %>%
+  mutate(name = paste(last_name, ", ", first_name, sep = "")) %>%
+  filter(school %in% c("FAS", "SEAS")) %>%
+  group_by(name, title, school, gender, race, department) %>%
+  summarize(donations_sum = sum(contribution_receipt_amount)) %>%
+  ungroup() %>%
+  arrange(desc(donations_sum)) %>%
+  distinct(name, .keep_all = T)
+```
+
