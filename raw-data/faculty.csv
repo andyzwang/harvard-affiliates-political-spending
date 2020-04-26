@@ -1718,7 +1718,7 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Narayanamurti, Venkatesh",Benjamin Peirce Research Professor of Technology and Public Policy,M,Asian,SEAS,APPHYS
 "Needleman, Daniel",Gordon McKay Professor of Applied Physics and Professor of Molecular and Cellular Biology,M,White,SEAS,APPHYS
 "Nelson, David",Arthur K. Solomon Professor of Biophysics and Professor of Physics and Applied Physics,M,White,SEAS,APPHYS
-"Prigozhin, Maxim",Assistant Professor of Molecular and Cellular Biology and of Applied Physics,M,ASian,SEAS,APPHYS
+"Prigozhin, Maxim",Assistant Professor of Molecular and Cellular Biology and of Applied Physics,M,Asian,SEAS,APPHYS
 "Ramanathan, Sharad",Llura and Gordon Gund Professor of Neurosciences and of Molecular and Cellular Biology and Professor of Applied Physics and Stem Cell and Regenerative Biology,M,Asian,SEAS,APPHYS
 "Rubinstein, Shmuel",Associate Professor of Applied Physics,M,White,SEAS,APPHYS
 "Weitz, David",Mallinckrodt Professor of Physics and of Applied Physics,M,White,SEAS,APPHYS
@@ -1795,24 +1795,24 @@ Shigehisa Kuriyama,Reischauer Institute Professor of Cultural History,M,Asian,FA
 "Tziperman, Eli","Pamela and Vasco McCoy, Jr. Professor of Oceanography and Applied Physics",M,White,SEAS,ESE
 "Wofsy, Steven",Abbott Lawrence Rotch Professor of Atmospheric and Environmental Science,M,White,SEAS,ESE
 "Wordsworth, Robin",Associate Professor of Environmental Science and Engineering,M,White,SEAS,ESE
-"Aizenberg, Joanna",Amy Smith Berylson Professor of Materials Science and Professor of Chemistry & Chemical Biology,F,White,SESA,MECHE
-"Aziz, Michael",Gene and Tracy Sykes Professor of Materials and Energy Technologies,M,White,SESA,MECHE
-"Bertoldi, Katia",William and Ami Kuan Danoff Professor of Applied Mechanics,F,White,SESA,MECHE
-"Clarke, David",Extended Tarr Family Professor of Materials,M,White,SESA,MECHE
-"Friend, Cynthia",Theodore William Richards Professor of Chemistry and Professor of Materials Science,F,White,SESA,MECHE
-"Gordon, Roy",Thomas Dudley Cabot Professor of Chemistry and Professor of Materials Science,M,White,SESA,MECHE
-"Howe, Robert",Abbott and James Lawrence Professor of Engineering,M,White,SESA,MECHE
-"Kozinsky, Boris",Associate Professor of Computational Materials Science,M,White,SESA,MECHE
-"Lewis, Jennifer",Hansjorg Wyss Professor of Biologically Inspired Engineering,F,White,SESA,MECHE
-"Li, Xin",Associate Professor of Materials Science,M,Asian,SESA,MECHE
-"McCullough, Richard",Vice Provost for Research,M,White,SESA,MECHE
-"Narang, Prineha",Assistant Professor of Computational Materials Science,F,Asian,SESA,MECHE
-"Rice, James",Mallinckrodt Professor of Engineering Sciences and Geophysics,M,White,SESA,MECHE
-"Spaepen, Frans",John C. and Helen F. Franklin Professor of Applied Physics,M,White,SESA,MECHE
-"Suo, Zhigang",Allen E. and Marilyn M. Puckett Professor of Mechanics and Materials,M,Asian,SESA,MECHE
-"Vlassak, Joost",Abbott and James Lawrence Professor of Materials Engineering,M,White,SESA,MECHE
-"Walsh, Conor",Gordon McKay Professor of Engineering and Applied Sciences,M,White,SESA,MECHE
-"Wood, Robert",Charles River Professor of Engineering and Applied Sciences,M,White,SESA,MECHE
+"Aizenberg, Joanna",Amy Smith Berylson Professor of Materials Science and Professor of Chemistry & Chemical Biology,F,White,SEAS,MECHE
+"Aziz, Michael",Gene and Tracy Sykes Professor of Materials and Energy Technologies,M,White,SEAS,MECHE
+"Bertoldi, Katia",William and Ami Kuan Danoff Professor of Applied Mechanics,F,White,SEAS,MECHE
+"Clarke, David",Extended Tarr Family Professor of Materials,M,White,SEAS,MECHE
+"Friend, Cynthia",Theodore William Richards Professor of Chemistry and Professor of Materials Science,F,White,SEAS,MECHE
+"Gordon, Roy",Thomas Dudley Cabot Professor of Chemistry and Professor of Materials Science,M,White,SEAS,MECHE
+"Howe, Robert",Abbott and James Lawrence Professor of Engineering,M,White,SEAS,MECHE
+"Kozinsky, Boris",Associate Professor of Computational Materials Science,M,White,SEAS,MECHE
+"Lewis, Jennifer",Hansjorg Wyss Professor of Biologically Inspired Engineering,F,White,SEAS,MECHE
+"Li, Xin",Associate Professor of Materials Science,M,Asian,SEAS,MECHE
+"McCullough, Richard",Vice Provost for Research,M,White,SEAS,MECHE
+"Narang, Prineha",Assistant Professor of Computational Materials Science,F,Asian,SEAS,MECHE
+"Rice, James",Mallinckrodt Professor of Engineering Sciences and Geophysics,M,White,SEAS,MECHE
+"Spaepen, Frans",John C. and Helen F. Franklin Professor of Applied Physics,M,White,SEAS,MECHE
+"Suo, Zhigang",Allen E. and Marilyn M. Puckett Professor of Mechanics and Materials,M,Asian,SEAS,MECHE
+"Vlassak, Joost",Abbott and James Lawrence Professor of Materials Engineering,M,White,SEAS,MECHE
+"Walsh, Conor",Gordon McKay Professor of Engineering and Applied Sciences,M,White,SEAS,MECHE
+"Wood, Robert",Charles River Professor of Engineering and Applied Sciences,M,White,SEAS,MECHE
 "Aldy, Joseph",Professor of the Practice of Public Policy,M,White,HKS,HKS
 "Allison, Graham",Douglas Dillon Professor of Government in the John F. Kennedy School of Government,M,White,HKS,HKS
 "Alsan, Marcella",Professor of Public Policy,F,White,HKS,HKS
@@ -2774,130 +2774,83 @@ Kazlas,Associate Professor of Ophthalmology,F,White,HMS,OPTHA
 "Blendon, Robert",Senior Associate Dean for Policy Translation and Leadership Development,M,White,HSPH,ADMIN
 "Turnbull, Nancy",Senior Lecturer on Health Policy,F,White,HSPH,ADMIN
 "Johnson, Betty","Assistant Dean for Faculty and Staff Diversity, Development and Leadership",F,African American,HSPH,ADMIN
-"Brown-Nagin, Tomiko","Dean, Radcliffe Institute for Advanced Study; Daniel P.S. Paul Professor of Constitutional Law, Harvard Law School; and Professor of History, Faculty of Arts and Sciences, Harvard University",F,African American,RADCLIFFE,ADMIN
-"Dunn, Marilyn",The Lia Gelin Poorvu Executive Director of the Arthur and Elizabeth Schlesinger Library on the History of Women in America and Librarian of the Radcliffe Institute,F,White,RADCLIFFE,ADMIN
-"Elwood, Stacey",Associate Dean for External Relations,F,White,RADCLIFFE,ADMIN
-"Kamensky, Jane",Carl and Lily Pforzheimer Foundation Director of the Arthur and Elizabeth Schlesinger Library on the History of Women in America and Jonathan Trumbull Professor of American History in the Harvard Faculty of Arts and Sciences,F,White,RADCLIFFE,ADMIN
-"Mongia, Nisha",Executive Dean,F,Asian,RADCLIFFE,ADMIN
-"Quinn, Meredith",Associate Dean for Strategy and Academic Programs,F,White,RADCLIFFE,ADMIN
-"Renauer, Ann",Associate Dean of Finance and Chief Financial Officer,F,White,RADCLIFFE,ADMIN
-"Rizzini, Claudia",Executive Director of the Fellowship Program,F,White,RADCLIFFE,ADMIN
-"Wassarman, Rebecca",Executive Director of Academic Ventures,F,White,RADCLIFFE,ADMIN
-"Bleich, Sara",Carol K. Pforzheimer Professor and social sciences advisor at the Radcliffe Institute and professor at the Harvard T.H. Chan School of Public Health,F,African American,RADCLIFFE,RADCLIFFE
-"Chenoweth, Erica",Susan S. and Kenneth L. Wallach Professor at the Radcliffe Institute and professor of public policy at Harvard Kennedy School,F,White,RADCLIFFE,RADCLIFFE
-"Davis, Christina",Susan S. and Kenneth L. Wallach Professor at the Radcliffe Institute and professor of government in the Harvard Faculty of Arts and Sciences,F,White,RADCLIFFE,RADCLIFFE
-"Dwork, Cynthia",Radcliffe Alumnae Professor at the Radcliffe Institute and Gordon McKay Professor of Computer Science at the Harvard John A. Paulson School of Engineering and Applied Sciences,F,White,RADCLIFFE,RADCLIFFE
-"Givens, Jarvis",Suzanne Young Murray Assistant Professor at the Radcliffe Institute and assistant professor of education at the Harvard Graduate School of Education,M,African American,RADCLIFFE,RADCLIFFE
-"Glassman, Elena Leah",Stanley A. Marks and William H. Marks Assistant Professor at the Radcliffe Institute and assistant professor of computer science at the Harvard John A. Paulson School of Engineering and Applied Sciences,F,White,RADCLIFFE,RADCLIFFE
-"Jack, Anthony Abraham","Shutzer Assistant Professor at the Radcliffe Institute, junior fellow at the Harvard Society of Fellows, and assistant professor of education at the Harvard Graduate School of Education",M,African American,RADCLIFFE,RADCLIFFE
-"Kaijima, Swakoa",Shutzer Assistant Professor at the Radcliffe Institute and assistant professor at Harvard Graduate School of Design,F,Asian,RADCLIFFE,RADCLIFFE
-"Kinew, Shawon",Shutzer Assistant Professor at the Radcliffe Institute and assistant professor of history of art and architecture in the Harvard Faculty of Arts and Sciences,F,White,RADCLIFFE,RADCLIFFE
-"Miles, Tiya",Radcliffe Alumnae Professor at the Radcliffe Institute and professor of history in the Harvard Faculty of Arts and Sciences,F,African American,RADCLIFFE,RADCLIFFE
-"Mitra, Durba","Carol K. Pforzheimer Assistant Professor at the Radcliffe Institute and assistant professor of women, gender, and sexuality in the Harvard Faculty of Arts and Sciences",F,Asian,RADCLIFFE,RADCLIFFE
-"Muhammad, Khalil Gibran","Suzanne Young Murray Professor at the Radcliffe Institute and professor of history, race, and public policy at Harvard Kennedy School",M,African American,RADCLIFFE,RADCLIFFE
-"Murphy, SUsan",Radcliffe Alumnae Professor at the Radcliffe Institute and professor of statistics and of computer science in the Harvard Faculty of Arts and Sciences,F,White,RADCLIFFE,RADCLIFFE
-"Shelley, Braxton",Stanley A. Marks and William H. Marks Assistant Professor at the Radcliffe Institute and assistant professor of music in the Harvard Faculty of Arts and Sciences,M,African American,RADCLIFFE,RADCLIFFE
-"Thomas, Todne",Suzanne Young Murray Assistant Professor at the Radcliffe Institute and assistant professor of African American religions at Harvard Divinity School,F,African American,RADCLIFFE,RADCLIFFE
-"Warinner, Christina",Sally Starling Seaver Assistant Professor at the Radcliffe Institute and assistant professor of anthropology in the Harvard Faculty of Arts and Sciences,F,White,RADCLIFFE,RADCLIFFE
-"Weinrib, Laura",Suzanne Young Murray Professor at the Radcliffe Institute and professor of law at Harvard Law School,F,White,RADCLIFFE,RADCLIFFE
-"Williams, Lauren",Sally Starling Seaver Professor at the Radcliffe Institute and professor of mathematics in the Harvard Faculty of Arts and Sciences,F,White,RADCLIFFE,RADCLIFFE
-"Abbate, Carolyn",Paul and Catherine Buttenwieser University Professor,F,White,UNIVERSITY,UNIVERSITY
-"Allen, Danielle",James Bryant Conant University Professor,F,African American,UNIVERSITY,UNIVERSITY
-"Barreira, Paul",Associate Professor of Psychiatry,M,White,UNIVERSITY,UNIVERSITY
-"Blair, Ann",Carl H. Pforzheimer University Professor,F,White,UNIVERSITY,UNIVERSITY
-"Clark, Robert",Austin Wakeman Scott Professor of Law,M,White,UNIVERSITY,UNIVERSITY
-"Elliott, Mark",Mark Schwartz Professor of Chinese and Inner Asian History,M,White,UNIVERSITY,UNIVERSITY
-"Faust, Drew",Arthur Kingsley Porter University Professor,F,White,UNIVERSITY,UNIVERSITY
-"Galison, Peter",Pellegrino University Professor,M,White,UNIVERSITY,UNIVERSITY
-"Garber, Alan",Mallinckrodt Professor of Health Care Policy,M,White,UNIVERSITY,UNIVERSITY
-"Gates, Henry","Alphonse Fletcher, Jr., University Professor",M,African American,UNIVERSITY,UNIVERSITY
-"Gone, Joseph",Professor of Anthropology and of Global Health and Social Medicine,M,White,UNIVERSITY,UNIVERSITY
-"Greenblatt, Stephen",Cogan University Professor,M,White,UNIVERSITY,UNIVERSITY
-"Hart, Oliver",Lewis P and Linda L Geyser University Professor,M,White,UNIVERSITY,UNIVERSITY
-"Hyman, Steven",Professor of Stem Cell and Regenerative Biology,M,White,UNIVERSITY,UNIVERSITY
-"Jorgenson, Dale",Samuel W. Morris University Professor,M,White,UNIVERSITY,UNIVERSITY
-"King, Gary",Albert J. Weatherhead III University Professor,M,White,UNIVERSITY,UNIVERSITY
-"Kirby, William",T. M. Chang Professor of China Studies,M,White,UNIVERSITY,UNIVERSITY
-"Lieber, Charles",Joshua and Beth Friedman University Professor,M,White,UNIVERSITY,UNIVERSITY
-"Maskin, Eric",Adams University Professor,M,White,UNIVERSITY,UNIVERSITY
-"Mazur, Barry",Gade University Professor,M,White,UNIVERSITY,UNIVERSITY
-"Minow, Martha",Three Hundredth Anniversary University Professor,F,White,UNIVERSITY,UNIVERSITY
-"Rowe, Peter",Raymond Garbe Professor of Architecture and Urban Design,M,White,UNIVERSITY,UNIVERSITY
-"Sen, Amartya",Thomas W. Lamont University Professor,M,Asian,UNIVERSITY,UNIVERSITY
-"Shapiro, Irwin",Timken University Professor,M,White,UNIVERSITY,UNIVERSITY
-"Singer, Judith",James Bryant Conant Professor of Education,M,White,UNIVERSITY,UNIVERSITY
-"Summers, Lawrence",Charles W. Eliot University Professor,M,White,UNIVERSITY,UNIVERSITY
-"Tribe, Laurence",The Carl M. Loeb University Professor,M,White,UNIVERSITY,UNIVERSITY
-"Whitesides, George",Woodford L. and Ann A. Flowers University Professor,M,White,UNIVERSITY,UNIVERSITY
-"Bacow, Lawrence",President of harvard,M,White,UNIVERSITY,ADMIN
-"Garber, Alan",Provost of Harvard,M,White,UNIVERSITY,PROVOST
-"Anand, Bharat",Vice Provost for Advances in Learning,M,Asian,UNIVERSITY,PROVOST
-"Buckley, Kathleen",Associate Provost for Science,F,White,UNIVERSITY,PROVOST
-"Chantaruchirakorn, Tez",Chief of Staff,M,Asian,UNIVERSITY,PROVOST
-"Elliott, Mark",Vice Provost for International Affairs,M,White,UNIVERSITY,PROVOST
-"Gross, Lori",Associate Provost for Arts and Culture,F,White,UNIVERSITY,PROVOST
-"Kohlberg, Isaac","Senior Associate Provost, Chief Technology Development Officer",M,White,UNIVERSITY,PROVOST
-"Koretz, Doreen",Associate Provost for Social Sciences and Professions,F,White,UNIVERSITY,PROVOST
-"McCullough, Richard",Vice Provost for Research,M,White,UNIVERSITY,PROVOST
-"Newell, Peggy",Deputy Provost,F,White,UNIVERSITY,PROVOST
-"Singer, Judith",Senior Vice Provost for Faculty Development and Diversity,F,White,UNIVERSITY,PROVOST
-"Whitehead, Martha",Vice President for the Harvard Library and University Librarian,F,White,UNIVERSITY,PROVOST
-"Ancarana, Elizabeth",Assistant Provost for Faculty Development and Diversity,F,White,UNIVERSITY,PROVOST
-"Knoll, Elizabeth",Assistant Provost for Faculty Appointments,F,White,UNIVERSITY,PROVOST
-"Pulitzer, Brooke",Assistant Provost for Research,F,White,UNIVERSITY,PROVOST
-"Finnegan, Paul","Treasurer, Harvard",M,White,UNIVERSITY,ADMIN
-"Lapp, Katherine",Executive Vice President,F,White,UNIVERSITY,ADMIN
-"Andrew, Paul",Vice President for Public Affairs and Communications,M,White,UNIVERSITY,ADMIN
-"Lee, Brian",Vice President for Alumni Affairs and Development,M,White,UNIVERSITY,ADMIN
-"Hausammann, Marilyn",Vice President for Human Resources,F,White,UNIVERSITY,ADMIN
-"Goodheart, Marc","Vice President, Secretary of the University,",M,White,UNIVERSITY,ADMIN
-"Marguelies, Anne",Vice President for Harvard Information Technology Services and Chief Information Officer (CIO),F,White,UNIVERSITY,ADMIN
-"Bellinger, Patricia",Chief of Staff and Strategic Advisor to the President,F,African American,UNIVERSITY,ADMIN
-"Whitehead, Martha",Vice President for the Harvard Library,F,White,UNIVERSITY,ADMIN
-"Lopez, Diane",Vice President and General Counsel,F,White,UNIVERSITY,ADMIN
-"Hollister, Thomas",Vice President for Finance and Chief Financial Officer,M,White,UNIVERSITY,ADMIN
-"Weenick, Meredith",Vice President for Campus Services,F,White,UNIVERSITY,ADMIN
-"Bacow, Lawrence",President,M,White,UNIVERSITY,CORPORATION
-"Martin, Carolyn",Fellow,F,White,UNIVERSITY,CORPORATION
-"Barakett, Timothy",Fellow,M,White,UNIVERSITY,CORPORATION
-"Mills, Karen Gordon",Fellow,F,White,UNIVERSITY,CORPORATION
-"Chenault, Kenneth",Fellow,M,African American,UNIVERSITY,CORPORATION
-"Pritzker, Penny",Fellow,F,White,UNIVERSITY,CORPORATION
-"Cuellar, Mariano-Florentino",Fellow,M,White,UNIVERSITY,CORPORATION
-"Rubenstein, David",Fellow,M,White,UNIVERSITY,CORPORATION
-"Finnegan, Paul",Fellow,M,White,UNIVERSITY,CORPORATION
-"Tilghman, Shirley",Fellow,F,White,UNIVERSITY,CORPORATION
-"Lee, William",Senior Fellow,M,Asian,UNIVERSITY,CORPORATION
-"Wells, Theodore",Fellow,M,White,UNIVERSITY,CORPORATION
-"Acuna-Sunshine, Geraldine",Member,F,White,UNIVERSITY,OVERSEER
-"Brown, Michael",Member,M,White,UNIVERSITY,OVERSEER
-"Chase-Lansdale, P. Lindsay",Member,F,White,UNIVERSITY,OVERSEER
-"Chavez, R. Martin",Member,M,White,UNIVERSITY,OVERSEER
-"Chen, Alice",Member,F,Asian,UNIVERSITY,OVERSEER
-"Choi, Paul",Member,M,Asian,UNIVERSITY,OVERSEER
-"Cullom, Philip Hart",Member,M,White,UNIVERSITY,OVERSEER
-"Duffley, Fernande",Member,F,White,UNIVERSITY,OVERSEER
-"Echelman, Janet",Member,F,White,UNIVERSITY,OVERSEER
-"Foulkes, Helena",Member,F,White,UNIVERSITY,OVERSEER
-"Greene, Brian",Member,M,White,UNIVERSITY,OVERSEER
-"Harris, Carla",Member,F,African American,UNIVERSITY,OVERSEER
-"Hodges, Meredith",Member,F,White,UNIVERSITY,OVERSEER
-"Holifield, Marilyn",Member,F,African American,UNIVERSITY,OVERSEER
-"Driver Hudson, Darienne",Member,F,African American,UNIVERSITY,OVERSEER
-"Hunt, Vivian",Member,F,African American,UNIVERSITY,OVERSEER
-"Jacks, Tyler",Member,M,White,UNIVERSITY,OVERSEER
-"Jackson, Ketanji Brown",Member,F,African American,UNIVERSITY,OVERSEER
-"Karlan, Beth",Member,F,White,UNIVERSITY,OVERSEER
-"King, John",Member,M,African American,UNIVERSITY,OVERSEER
-"Lynton, Michael",Member,M,White,UNIVERSITY,OVERSEER
-"Ramirez Magana, Alejandro",Member,M,White,UNIVERSITY,OVERSEER
-"Rodriguez, Diego",Member,M,White,UNIVERSITY,OVERSEER
-"Rosenthal, Lesley Friedman",Member,F,White,UNIVERSITY,OVERSEER
-"Roubideaux, Yvette",Member,F,White,UNIVERSITY,OVERSEER
-"Saujani, Reshma",Member,F,Asian,UNIVERSITY,OVERSEER
-"Tolbert, Leslie",Member,F,White,UNIVERSITY,OVERSEER
-"Walker, Kent",Member,M,White,UNIVERSITY,OVERSEER
-"Wilson, John Silvanus",Member,M,African American,UNIVERSITY,OVERSEER
-"Wise, Ryan",Member,M,White,UNIVERSITY,OVERSEER
-"Bacow, Lawrence",Member,M,White,UNIVERSITY,OVERSEER
-"Finnegan, Paul",Member,M,White,UNIVERSITY,OVERSEER
+"Brown-Nagin, Tomiko","Dean, Radcliffe Institute for Advanced Study; Daniel P.S. Paul Professor of Constitutional Law, Harvard Law School; and Professor of History, Faculty of Arts and Sciences, Harvard University",F,African American,RAD,ADMIN
+"Dunn, Marilyn",The Lia Gelin Poorvu Executive Director of the Arthur and Elizabeth Schlesinger Library on the History of Women in America and Librarian of the Radcliffe Institute,F,White,RAD,ADMIN
+"Elwood, Stacey",Associate Dean for External Relations,F,White,RAD,ADMIN
+"Kamensky, Jane",Carl and Lily Pforzheimer Foundation Director of the Arthur and Elizabeth Schlesinger Library on the History of Women in America and Jonathan Trumbull Professor of American History in the Harvard Faculty of Arts and Sciences,F,White,RAD,ADMIN
+"Mongia, Nisha",Executive Dean,F,Asian,RAD,ADMIN
+"Quinn, Meredith",Associate Dean for Strategy and Academic Programs,F,White,RAD,ADMIN
+"Renauer, Ann",Associate Dean of Finance and Chief Financial Officer,F,White,RAD,ADMIN
+"Rizzini, Claudia",Executive Director of the Fellowship Program,F,White,RAD,ADMIN
+"Wassarman, Rebecca",Executive Director of Academic Ventures,F,White,RAD,ADMIN
+"Bleich, Sara",Carol K. Pforzheimer Professor and social sciences advisor at the Radcliffe Institute and professor at the Harvard T.H. Chan School of Public Health,F,African American,RAD,RAD
+"Chenoweth, Erica",Susan S. and Kenneth L. Wallach Professor at the Radcliffe Institute and professor of public policy at Harvard Kennedy School,F,White,RAD,RAD
+"Davis, Christina",Susan S. and Kenneth L. Wallach Professor at the Radcliffe Institute and professor of government in the Harvard Faculty of Arts and Sciences,F,White,RAD,RAD
+"Dwork, Cynthia",Radcliffe Alumnae Professor at the Radcliffe Institute and Gordon McKay Professor of Computer Science at the Harvard John A. Paulson School of Engineering and Applied Sciences,F,White,RAD,RAD
+"Givens, Jarvis",Suzanne Young Murray Assistant Professor at the Radcliffe Institute and assistant professor of education at the Harvard Graduate School of Education,M,African American,RAD,RAD
+"Glassman, Elena Leah",Stanley A. Marks and William H. Marks Assistant Professor at the Radcliffe Institute and assistant professor of computer science at the Harvard John A. Paulson School of Engineering and Applied Sciences,F,White,RAD,RAD
+"Jack, Anthony Abraham","Shutzer Assistant Professor at the Radcliffe Institute, junior fellow at the Harvard Society of Fellows, and assistant professor of education at the Harvard Graduate School of Education",M,African American,RAD,RAD
+"Kaijima, Swakoa",Shutzer Assistant Professor at the Radcliffe Institute and assistant professor at Harvard Graduate School of Design,F,Asian,RAD,RAD
+"Kinew, Shawon",Shutzer Assistant Professor at the Radcliffe Institute and assistant professor of history of art and architecture in the Harvard Faculty of Arts and Sciences,F,White,RAD,RAD
+"Miles, Tiya",Radcliffe Alumnae Professor at the Radcliffe Institute and professor of history in the Harvard Faculty of Arts and Sciences,F,African American,RAD,RAD
+"Mitra, Durba","Carol K. Pforzheimer Assistant Professor at the Radcliffe Institute and assistant professor of women, gender, and sexuality in the Harvard Faculty of Arts and Sciences",F,Asian,RAD,RAD
+"Muhammad, Khalil Gibran","Suzanne Young Murray Professor at the Radcliffe Institute and professor of history, race, and public policy at Harvard Kennedy School",M,African American,RAD,RAD
+"Murphy, SUsan",Radcliffe Alumnae Professor at the Radcliffe Institute and professor of statistics and of computer science in the Harvard Faculty of Arts and Sciences,F,White,RAD,RAD
+"Shelley, Braxton",Stanley A. Marks and William H. Marks Assistant Professor at the Radcliffe Institute and assistant professor of music in the Harvard Faculty of Arts and Sciences,M,African American,RAD,RAD
+"Thomas, Todne",Suzanne Young Murray Assistant Professor at the Radcliffe Institute and assistant professor of African American religions at Harvard Divinity School,F,African American,RAD,RAD
+"Warinner, Christina",Sally Starling Seaver Assistant Professor at the Radcliffe Institute and assistant professor of anthropology in the Harvard Faculty of Arts and Sciences,F,White,RAD,RAD
+"Weinrib, Laura",Suzanne Young Murray Professor at the Radcliffe Institute and professor of law at Harvard Law School,F,White,RAD,RAD
+"Williams, Lauren",Sally Starling Seaver Professor at the Radcliffe Institute and professor of mathematics in the Harvard Faculty of Arts and Sciences,F,White,RAD,RAD
+"Abbate, Carolyn",Paul and Catherine Buttenwieser University Professor,F,White,UNI,UNI
+"Allen, Danielle",James Bryant Conant University Professor,F,African American,UNI,UNI
+"Blair, Ann",Carl H. Pforzheimer University Professor,F,White,UNI,UNI
+"Faust, Drew",Arthur Kingsley Porter University Professor,F,White,UNI,UNI
+"Galison, Peter",Pellegrino University Professor,M,White,UNI,UNI
+"Gates, Henry","Alphonse Fletcher, Jr., University Professor",M,African American,UNI,UNI
+"Greenblatt, Stephen",Cogan University Professor,M,White,UNI,UNI
+"Hart, Oliver",Lewis P and Linda L Geyser University Professor,M,White,UNI,UNI
+"Jorgenson, Dale",Samuel W. Morris University Professor,M,White,UNI,UNI
+"King, Gary",Albert J. Weatherhead III University Professor,M,White,UNI,UNI
+"Lieber, Charles",Joshua and Beth Friedman University Professor,M,White,UNI,UNI
+"Maskin, Eric",Adams University Professor,M,White,UNI,UNI
+"Mazur, Barry",Gade University Professor,M,White,UNI,UNI
+"Minow, Martha",Three Hundredth Anniversary University Professor,F,White,UNI,UNI
+"Sen, Amartya",Thomas W. Lamont University Professor,M,Asian,UNI,UNI
+"Shapiro, Irwin",Timken University Professor,M,White,UNI,UNI
+"Summers, Lawrence",Charles W. Eliot University Professor,M,White,UNI,UNI
+"Tribe, Laurence",The Carl M. Loeb University Professor,M,White,UNI,UNI
+"Whitesides, George",Woodford L. and Ann A. Flowers University Professor,M,White,UNI,UNI
+"Kirschner, Marc",John Franklin Enders University Professor,M,White,UNI,UNI
+"Farmer, Paul",Kolokotrones University Professor,M,White,UNI,UNI
+"Porter, Michael",Bishop William Lawrence University Professor,M,White,UNI,UNI
+"Sunstein, Cass",Robert Walmsley University Professor,M,White,UNI,UNI
+"Melton, Douglas",Xander University Professor,M,White,UNI,UNI
+"Henderson, Rebecca",John and Natty McArthur University Professor,F,White,UNI,UNI
+"Bacow, Lawrence",President of Harvard,M,White,UNI,ADMIN
+"Garber, Alan",Provost of Harvard,M,White,UNI,PROVOST
+"Anand, Bharat",Vice Provost for Advances in Learning,M,Asian,UNI,PROVOST
+"Buckley, Kathleen",Associate Provost for Science,F,White,UNI,PROVOST
+"Chantaruchirakorn, Tez",Chief of Staff,M,Asian,UNI,PROVOST
+"Elliott, Mark",Vice Provost for International Affairs,M,White,UNI,PROVOST
+"Gross, Lori",Associate Provost for Arts and Culture,F,White,UNI,PROVOST
+"Kohlberg, Isaac","Senior Associate Provost, Chief Technology Development Officer",M,White,UNI,PROVOST
+"Koretz, Doreen",Associate Provost for Social Sciences and Professions,F,White,UNI,PROVOST
+"McCullough, Richard",Vice Provost for Research,M,White,UNI,PROVOST
+"Newell, Peggy",Deputy Provost,F,White,UNI,PROVOST
+"Singer, Judith",Senior Vice Provost for Faculty Development and Diversity,F,White,UNI,PROVOST
+"Whitehead, Martha",Vice President for the Harvard Library and UNI Librarian,F,White,UNI,PROVOST
+"Ancarana, Elizabeth",Assistant Provost for Faculty Development and Diversity,F,White,UNI,PROVOST
+"Knoll, Elizabeth",Assistant Provost for Faculty Appointments,F,White,UNI,PROVOST
+"Pulitzer, Brooke",Assistant Provost for Research,F,White,UNI,PROVOST
+"Finnegan, Paul","Treasurer, Harvard",M,White,UNI,ADMIN
+"Lapp, Katherine",Executive Vice President,F,White,UNI,ADMIN
+"Andrew, Paul",Vice President for Public Affairs and Communications,M,White,UNI,ADMIN
+"Lee, Brian",Vice President for Alumni Affairs and Development,M,White,UNI,ADMIN
+"Hausammann, Marilyn",Vice President for Human Resources,F,White,UNI,ADMIN
+"Goodheart, Marc","Vice President, Secretary of the University,",M,White,UNI,ADMIN
+"Marguelies, Anne",Vice President for Harvard Information Technology Services and Chief Information Officer (CIO),F,White,UNI,ADMIN
+"Bellinger, Patricia",Chief of Staff and Strategic Advisor to the President,F,African American,UNI,ADMIN
+"Whitehead, Martha",Vice President for the Harvard Library,F,White,UNI,ADMIN
+"Lopez, Diane",Vice President and General Counsel,F,White,UNI,ADMIN
+"Hollister, Thomas",Vice President for Finance and Chief Financial Officer,M,White,UNI,ADMIN
+"Weenick, Meredith",Vice President for Campus Services,F,White,UNI,ADMIN
