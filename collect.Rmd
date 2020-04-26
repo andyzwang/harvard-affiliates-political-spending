@@ -255,7 +255,7 @@ gender_race_school_model <- lm(
   tidy(conf.int = T)
 ```
 
-```{r engineering}
+```{r subjects}
 subject_field_data <- faculty_fec %>%
   mutate(name = paste(last_name, ", ", first_name, sep = "")) %>%
   filter(school %in% c("FAS", "SEAS")) %>%
@@ -272,6 +272,7 @@ subject_field_data <- faculty_fec %>%
   ))
   
 department_spending <- subject_field_data %>%
+  distinct(name, department, .keep_all = T) %>%
   group_by(department) %>%
   summarize(mean_donation = mean(donations_sum))
 
@@ -284,6 +285,12 @@ ggplot(subject_field_data, aes(x = department, y = donations_sum, color = gender
   coord_flip() +
   scale_y_log10(labels = scales::dollar)
 
+subject_spending <- subject_field_data %>%
+  distinct(name, field, .keep_all = T)
 
+ggplot(subject_spending, aes(x = field, y = donations_sum, color = gender)) +
+  geom_jitter(width = .1, height = .25) +
+  coord_flip() +
+  scale_y_log10(labels = scales::dollar)
   
 ```
