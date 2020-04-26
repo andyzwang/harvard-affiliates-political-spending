@@ -17,13 +17,14 @@ library(janitor)
 # importing the data from the faculty, which I grabbed online from departmental
 # websites, as well as reading in the correct column types.
 
-raw_faculty <- read_csv("raw-data/faculty.csv", col_types = "ccffcc") %>%
+faculty <- read_csv("raw-data/faculty.csv", col_types = "ccffcc") %>%
   clean_names()
 
 # reading in the FEC data (which used a bulk search on the term "harvard",
 # including the correct column types)
-raw_fec <- read_csv("raw-data/fec.csv", 
-                    col_types = "ccicdccicffcccccccccccccciccccccccTddcccccccccccccccccccccccfcccccccccdcccccccc")
+fec <- read_csv("raw-data/fec.csv",
+  col_types = "ccicdccicffcccccccccccccciccccccccTddcccccccccccccccccccccccfcccccccccdcccccccc"
+)
 
 # cleaning up the faculty data: I first split the names into a full name, which
 # I then split into a last name and a first name. I also did a bunch of error
@@ -31,27 +32,70 @@ raw_fec <- read_csv("raw-data/fec.csv",
 # their middle names instead of their first names. I then selected out the
 # information that wasn't necessary.
 
-clean_faculty <- raw_faculty %>%
+faculty <- faculty %>%
   mutate(
-    full_name = map(name, ~ unlist(strsplit(., ","))),
-    last_name = map(full_name, ~ .[1]),
-    full_first_name = map(full_name, ~ .[2])
+    full_name = map(
+      name, ~ unlist(strsplit(., ","))
+    ),
+    last_name = as.character(map(
+      full_name, ~ .[1]
+    )),
+    full_first_name = map(
+      full_name, ~ .[2]
+    ),
+    first_split = map(
+      full_first_name, ~ unlist(
+        strsplit(., "\ ")
+      )
+    ),
+    first_name = as.character(
+      map(
+        first_split, ~ .[2]
+      )
+    )
   ) %>%
-  mutate(first_split = map(full_first_name, ~ unlist(strsplit(., "\ ")))) %>%
-  mutate(first_name = map(first_split, ~ .[2]))
+  select(last_name, first_name, title, gender, race, school, department)
 
-  
 # used for error checking on last names to see if anyone has two last names
+
 # mutate(last_split = map(last_name, ~ unlist(strsplit(., "\ ")))) %>%
 # mutate(last2 = map(last_split, ~ .[2])) %>%
 # filter(!is.na(last2))
 
-clean_faculty %>%
-  filter(last_name %in% " ")
+# Now cleaning up the FEC data to put the information that we most need to the
+# front.
+
+fec <- fec %>%
+  mutate(
+    first_split = map(
+      contributor_first_name, ~ unlist(strsplit(., "\ "))
+    ),
+    first_name = str_to_title(map(
+      first_split, ~ .[1]
+    )),
+    last_name = str_to_title(contributor_last_name)
+  ) %>%
+  select(last_name, first_name, everything())
 ```
 
-```{r}
-x <- c("apple", "banana", "pear")
-str_view(x, "an")
-```
+```{r joining}
 
+# created the master of all tables with this data, merging on first and last.
+
+faculty_fec <- left_join(faculty, fec,
+  by = c("first_name", "last_name")
+) %>%
+  mutate(contribution_receipt_amount = coalesce(contribution_receipt_amount, 0))
+
+individual_donations <- faculty_fec %>%
+  filter(contribution_receipt_amount != 0) %>%
+  group_by(first_name, last_name, title, school, department) %>%
+  summarize(donations_sum = sum(contribution_receipt_amount)) %>%
+  arrange(desc(donations_sum))
+
+donation_recipients <- faculty_fec %>%
+  filter(contribution_receipt_amount != 0) %>%
+  group_by(committee_name) %>%
+  summarize(donations_sum = sum(contribution_receipt_amount)) %>%
+  arrange(desc(donations_sum))
+```
