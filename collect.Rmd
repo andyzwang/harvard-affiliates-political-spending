@@ -213,7 +213,7 @@ gender_race_school_data <- faculty_fec %>%
   summarize(donations_sum = sum(contribution_receipt_amount)) %>%
   ungroup() %>%
   arrange(desc(donations_sum)) %>%
-  distinct(name, .keep_all = T)
+  distinct(name, school, .keep_all = T)
 
 mean_donation_all <- gender_race_school_data %>%
   summarize(mean_donation = mean(donations_sum))
@@ -221,7 +221,7 @@ mean_donation_all <- gender_race_school_data %>%
 gender_breakdown <- gender_race_school_data %>%
   group_by(gender) %>%
   summarize(mean_donation = mean(donations_sum))
-  
+
 race_breakdown <- gender_race_school_data %>%
   group_by(race) %>%
   summarize(mean_donation = mean(donations_sum))
@@ -233,18 +233,25 @@ school_breakdown <- gender_race_school_data %>%
 
 race_gender_breakdown <- gender_race_school_data %>%
   group_by(race, gender) %>%
-  summarize(mean_donation = mean(donations_sum))%>%
+  summarize(mean_donation = mean(donations_sum)) %>%
   arrange(desc(mean_donation))
 
-ggplot(gender_race_school_data, aes(x = race, y = donations_sum, color = gender)) +
+ggplot(gender_race_school_data, aes(
+  x = race, y = donations_sum, color = gender
+)) +
   geom_jitter(width = .25, height = .1) +
   scale_y_continuous(labels = scales::dollar)
 
-ggplot(gender_race_school_data, aes(x = school, y = donations_sum, color = gender)) +
+ggplot(gender_race_school_data, aes(
+  x = school, y = donations_sum, color = gender
+)) +
   geom_jitter(width = .25, height = .1) +
   scale_y_continuous(labels = scales::dollar)
 
-gender_race_school_model <- lm(donations_sum ~ gender*race + school, gender_race_school_data) %>%
+gender_race_school_model <- lm(
+  donations_sum ~ gender * race + school,
+  gender_race_school_data
+) %>%
   tidy(conf.int = T)
 ```
 
@@ -256,6 +263,27 @@ subject_field_data <- faculty_fec %>%
   summarize(donations_sum = sum(contribution_receipt_amount)) %>%
   ungroup() %>%
   arrange(desc(donations_sum)) %>%
-  distinct(name, .keep_all = T)
-```
+  mutate(field = case_when(
+    school =="SEAS" ~ "Engineering",
+    department %in% c("AAAS", "ANTHRO", "ECON", "GOV", "HIST","PSCH","SOCSTUD","SOCIO","WGS") ~ "Social Sciences",
+    department %in% c("ASTRO", "CHEM", "EPS","HISTSCI","HEBIO","MATH","MCBIO","OEBIO","PHY","STAT","STRBIO") ~ "Math/Science",
+    department %in% c("CELTIC", "CLASSICS", "COMPLIT", "EALC", "ENG", "FOLKMYTH", "GERM", "HISTLIT","HAA","LING","MUSIC","NELC","PHIL","RELI","ROMANCE","SLAV","SAS") ~ "Humanities",
+    department == "ADMIN" ~"Admin"
+  ))
+  
+department_spending <- subject_field_data %>%
+  group_by(department) %>%
+  summarize(mean_donation = mean(donations_sum))
 
+ggplot(department_spending, aes(x = department, y = mean_donation)) +
+  geom_col() + 
+  coord_flip()
+
+ggplot(subject_field_data, aes(x = department, y = donations_sum, color = gender)) +
+  geom_jitter(width = .1, height = .25) +
+  coord_flip() +
+  scale_y_log10(labels = scales::dollar)
+
+
+  
+```
