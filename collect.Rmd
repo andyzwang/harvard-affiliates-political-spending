@@ -19,6 +19,7 @@ library(ggthemes)
 library(broom)
 library(tidyverse)
 library(gt)
+library(DT)
 ```
 
 ```{r importdata, errors = F, warning=F}
@@ -180,7 +181,8 @@ spending_recipients <- faculty_fec %>%
   filter(contribution_receipt_amount != 0) %>%
   group_by(committee_name, committee_id) %>%
   summarize(spending_sum = sum(contribution_receipt_amount)) %>%
-  arrange(desc(spending_sum))
+  arrange(desc(spending_sum)) %>%
+  ungroup()
 
 
 # joining with committee table
@@ -188,9 +190,7 @@ spending_recipients <- faculty_fec %>%
 spending_committees <- left_join(spending_recipients,
   committees,
   by = "committee_id"
-) %>%
-  select(-cmte_id, -cmte_nm)
-
+) 
 ```
 
 # Recipient Overview
@@ -199,38 +199,66 @@ After summarizing based on committee names and joining with committee, we have a
 
 ```{r viewrecipientsoverview, include = T}
 head(spending_committees)
+skimr::skim(spending_committees)
 ```
 
-```{r}
-# grouping by party and summarizing
+```{r parties, include = T}
+# making a summary based on party affiliation
 
-parties <- recipients_committees %>%
-  group_by(cmte_pty_affiliation) %>%
-  summarize(total_donations = sum(donations_sum)) %>%
-  filter(!is.na(cmte_pty_affiliation)) %>%
-  arrange(desc(total_donations))
+parties <- spending_committees %>%
+  rename(party = cmte_pty_affiliation) %>%
+  group_by(party) %>%
+  summarize(total_spending = sum(spending_sum)) %>%
+  filter(!is.na(party)) %>%
+  arrange(desc(total_spending))
 
-# summarizing by states
+ggplot(parties, aes(x = party, y = total_spending)) +
+  geom_col(fill = "lightblue") + 
+  theme_classic() +
+  scale_y_continuous(labels = scales::dollar_format()) +
+  labs(title = "Faculty Spendings to Each Party",
+       x = "Party",
+       y = "Sum of Spendings")
+```
+```{r individual_donations_party, include = T}
 
-states <- recipients_committees %>%
-  mutate(state = cmte_st) %>%
-  group_by(state) %>%
-  summarize(total_donations = sum(donations_sum)) %>%
-  arrange(desc(total_donations))
+# joining tables of individual donations with committee information, to be able to sort by party. group together by party, name, title, etc, and then summarize.
+
+individual_donations_party <- faculty_fec %>%
+  filter(contribution_receipt_amount != 0) %>%
+  left_join(committees, by = "committee_id") %>%
+  mutate(name = paste(last_name, ", ", first_name, sep = ""),
+         party = cmte_pty_affiliation) %>%
+  group_by(name, title, school, department, party) %>%
+  summarize(spending_sum = sum(contribution_receipt_amount)) %>%
+  ungroup() %>%
+  arrange(desc(spending_sum)) %>%
+  filter(!is.na(party)) %>%
+  distinct(name, party, .keep_all = T)
+
+head(individual_donations_party)
+skimr::skim(individual_donations_party)
 ```
 
 ```{r heatmap}
+# summarizing by states
+
+states <- spending_committees %>%
+  mutate(state = cmte_st) %>%
+  group_by(state) %>%
+  summarize(total_spending = sum(spending_sum)) %>%
+  arrange(desc(total_spending))
 
 # making a heatmap using plot_usmap
 
-plot_usmap(data = states, values = "total_donations") +
+plot_usmap(data = states, values = "total_spending") +
   scale_fill_continuous(
     low = "white", high = "blue",
-    name = "Dollars Donated", label = scales::dollar
+    name = "Dollars Donated Spent", label = scales::dollar
   ) +
   theme(legend.position = "right") +
   labs(
-    title = "States Recieving Harvard Donations",
+    title = "States Recieving Harvard Political Spending",
     subtitle = "Using FEC Data from 2017-2020"
   )
 ```
@@ -241,7 +269,7 @@ plot_usmap(data = states, values = "total_donations") +
 # departments), then mutating to create a month variable. From there,
 # summarizing per month
 
-donations_over_time <- faculty_fec %>%
+spending_over_time <- faculty_fec %>%
   mutate(name = paste(last_name, ", ", first_name, sep = "")) %>%
   distinct(name, pdf_url, .keep_all = T) %>%
   mutate(month = floor_date(contribution_receipt_date, "month")) %>%
@@ -251,15 +279,15 @@ donations_over_time <- faculty_fec %>%
 
 # plotting donations over time with ggplot
 
-ggplot(donations_over_time, aes(x = month, y = donations)) +
+ggplot(spending_over_time, aes(x = month, y = donations)) +
   geom_line() +
   labs(
     x = "Date",
-    y = "Total Donations",
-    title = "Total Harvard Donations Per Month"
+    y = "Total Spending",
+    title = "Total Harvard Political Spending Per Month"
   ) +
   theme_classic() +
-  scale_y_continuous(label = scales::dollar)
+  scale_y_continuous(label = scales::dollar) 
 ```
 
 ```{r GRSmodel}
