@@ -11,8 +11,9 @@ library(ggthemes)
 library(broom)
 library(tidyverse)
 
-# import the main data set 
+# import the main data set from separate file to minimize clutter.
 
+source("data.R")
 
 # define overall ui with navbar
 
