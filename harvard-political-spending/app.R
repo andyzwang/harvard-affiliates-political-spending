@@ -45,9 +45,18 @@ ui <- navbarPage(
     ),
     column(1)
   ),
+  
+  # third panel: breakdown of the recipients of Harvard spending
+  
   tabPanel(
     "Spending Recipients",
+    
+    # Using subtabs at the top
+    
     tabsetPanel(
+      
+      # Tab one: receipient overview
+      
       tabPanel(
         "Recipients Overview",
         h2("Recipient Overview"),
@@ -59,6 +68,9 @@ ui <- navbarPage(
         ),
         column(1)
       ),
+      
+      # tab two: the political parties
+      
       tabPanel(
         "Political Parties",
         h2("Political Parties"),
@@ -70,11 +82,17 @@ ui <- navbarPage(
         ),
         column(1)
       ),
+      
+      # Tab three: party spending breakdown
+      
       tabPanel(
         "Party Spending Breakdown",
         h2("Party Spending Breakdown"),
         p("As evidenced by the individual party spending breakdown, Harvard faculty very much strongly prefer spending money on Democratic candidates and organizations. However, this table is very much incomplete: some partisan organizations do not register as such with the FEC, and as such, faculty who have spent on these organizations are not reflected in this chart."),
         sidebarLayout(
+          
+          # sidebar for selecting party
+          
           sidebarPanel(
             selectInput(
               "party_spending_party",
@@ -91,11 +109,17 @@ ui <- navbarPage(
           mainPanel(DTOutput("party_breakdown"))
         )
       ),
+      
+      # Tab four: geographic spending
+      
       tabPanel(
         "Geographic Spending",
         h2("Geographic Spending"),
         p("The political spending of Harvard faculty is dispersed throughout the entire continential U.S., but is seemed to be concentrated in a few key states: California, Illinois, Texas, and Massachusetts. Note that ActBlue has its headquarters in Mass, which significantly distorts the map. Select a region to get a better sense of spending within each region."),
         sidebarLayout(
+          
+          # sidebar for selecting region
+          
           sidebarPanel(
             selectInput(
               "region_selection",
@@ -116,6 +140,9 @@ ui <- navbarPage(
           mainPanel(plotOutput("states"))
         )
       ),
+      
+      # tab five: donations over time
+      
       tabPanel(
         "Spending Over Time",
         h2("Spending Over Time"),
@@ -130,7 +157,7 @@ ui <- navbarPage(
     )
   ),
   tabPanel(
-    "Who Did My Professor Donate To?",
+    "Modelling Spending",
     titlePanel("About"),
     h3("Project Background and Motivations"),
     p("Hello, this is where I talk about my project."),
@@ -139,16 +166,7 @@ ui <- navbarPage(
              You can reach me at ______@college.harvard.edu.")
   ),
   tabPanel(
-    "Modelling Spending Behavior",
-    titlePanel("About"),
-    h3("Project Background and Motivations"),
-    p("Hello, this is where I talk about my project."),
-    h3("About Me"),
-    p("My name is ______ and I study ______. 
-             You can reach me at ______@college.harvard.edu.")
-  ),
-  tabPanel(
-    "Diversity in the Faculty",
+    "Faculty Diversity",
     titlePanel("Diversity in the Faculty"),
     h3("Project Background and Motivations"),
     p("Hello, this is where I talk about my project."),
