@@ -13,4 +13,9 @@ spending_by_individual <- faculty_fec %>%
   ungroup() %>%
   arrange(desc(spending_sum)) %>%
   distinct(name, .keep_all = T) %>%
-  filter(spending_sum != 0) 
+  filter(spending_sum != 0)  %>%
+  rename('Name' = name,
+         'Title' = title,
+         'School' = school,
+         'Department' = department,
+         'Sum of Spending' = spending_sum)
