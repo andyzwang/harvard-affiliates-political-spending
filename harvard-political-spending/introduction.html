@@ -15,11 +15,14 @@
   <p>
     First, this data set combines Federal Elections Commission individual contribution and committees data with a dataset of Harvard faculty. However, given that there is no pre-made data set of Harvard faculty, I used Harvard's Faculty Finder website, as well as individual department and constituent school websites, to create a listing of nearly 2,400 faculty members. Anyone who was listed in the "Primary Faculty" portion of a department's faculty listing is included in my dataset, though there are still large departments missing, primarily from the Medical School. 
   </p>
-  <p>
-    Second, I manually assigned the variables of gender and race based off of photos of faculty. Although an imperfect method, Harvard releases diversity data in the aggregate, making analysis on these two variables nearly impossible. The other alternative could have been to use gender and race approximation packages, but I felt that manual analysis may be more accurate. I also opted to use the U.S. Census' 5 race categories, simplified into just three: White American, Black or African American, and Asian American.
+    <p>
+    Secondly, the FEC dataset critically only includes those who report their employer as Harvard and donate through individual contributions. Therefore, I cannot access data for those who use a different name, report a different employer, or use an alternate method of political spending. Through this method, I only have donation data for about 25% of the faculty (666 individuals). 
   </p>
   <p>
-    Third, in order to best present data, many schools and departments are abbreviated. University in terms of school refers to both University Administration, as well as the 24 University Professors. 
+    Thirdly, I manually assigned the variables of gender and race based off of photos of faculty. Although an imperfect method, Harvard releases diversity data in the aggregate, making analysis on these two variables nearly impossible. The other alternative could have been to use gender and race approximation packages, but I felt that manual analysis may be more accurate. I also opted to use the U.S. Census' 5 race categories, simplified into just three: White American, Black or African American, and Asian American.
+  </p>
+  <p>
+    Fourthly, in order to best present data, many schools and departments are abbreviated. University in terms of school refers to both University Administration, as well as the 24 University Professors. 
   </p>
   <p>
     Finally, many faculty members are affiliated with multiple departments or schools. In those cases, I included their data twice, or however times needed. However, when analyzing categories as an aggregate, I made sure to remove duplicated instances to not affect the totals and means of the category In other words, a FAS professor in both AAAS and ENG is factored into both for departmental breakdowns, but counted only once for FAS-wide aggregates. 
