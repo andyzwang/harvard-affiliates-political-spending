@@ -17,16 +17,17 @@ library(broom)
 library(tidyverse)
 ```
 
-```{r import}
+```{r importdata}
 
-# importing the data from the faculty, which I grabbed online from departmental
-# websites, as well as reading in the correct column types.
+# importing the data from the faculty, as well as reading in the correct column
+# types.
 
 faculty <- read_csv("raw-data/faculty.csv", col_types = "ccffcc") %>%
   clean_names()
 
-# reading in the FEC data (which used a bulk search on the term "harvard",
-# including the correct column types)
+# reading in the FEC data (using a bulk search on the term "harvard", filtering
+# for years from 2017 - 2020, including the correct column types)
+
 fec <- read_csv("raw-data/fec1720.csv",
   col_types = "ccicdccicffcccccccccccccciccccccccTddcccccccccccccccccccccccfcccccccccdcccccccc"
 )
@@ -35,7 +36,9 @@ fec <- read_csv("raw-data/fec1720.csv",
 # I then split into a last name and a first name. I also did a bunch of error
 # checking, since some people did in fact go by both names, or some people used
 # their middle names instead of their first names. I then selected out the
-# information that wasn't necessary.
+# information that wasn't necessary. From there, I simplified to only use the
+# first first name given, since I can do that with the FEC data too to make sure
+# that no one is left out.
 
 faculty <- faculty %>%
   mutate(
@@ -68,7 +71,9 @@ faculty <- faculty %>%
 # filter(!is.na(last2))
 
 # Now cleaning up the FEC data to put the information that we most need to the
-# front.
+# front, as well as adding consistent column names so that merging is easier
+# later. Changed names' case from all-caps to title, so that it matches our
+# Harvard dataset.
 
 fec <- fec %>%
   mutate(
@@ -84,6 +89,9 @@ fec <- fec %>%
 ```
 
 ```{r committeesdata}
+# importing FEC committees data, cleaning up names and changing up column names
+# to be consistent with other data set for easy join later.
+
 committees <- read_delim("raw-data/committees1920.txt",
   "|",
   escape_double = FALSE, col_names = TRUE,
