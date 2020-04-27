@@ -65,3 +65,14 @@ fec <- fec %>%
     last_name = str_to_title(contributor_last_name)
   ) %>%
   select(last_name, first_name, everything())
+
+# importing FEC committees data, cleaning up names and changing up column names
+# to be consistent with other data set for easy join later.
+
+committees <- read_delim("raw-data/committees1920.txt",
+                         "|",
+                         escape_double = FALSE, col_names = TRUE,
+                         trim_ws = TRUE
+) %>%
+  clean_names() %>%
+  mutate(committee_id = cmte_id)
