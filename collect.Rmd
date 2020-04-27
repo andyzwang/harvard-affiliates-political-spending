@@ -128,50 +128,80 @@ skimr::skim(faculty_fec)
 ```
 
 
-```{r individualdonations}
-# HERE
+```{r topspenders}
+# Creating a table of the top spenders. Creating a new column called name, based
+# on the paste function, and then summarizing on name (keeping title, school,
+# and department for table readability). Arranging for spending in decreasing
+# sums, then looking for distinct names (we are losing a little bit of context
+# of having all titles of a professor, but this is an okay cost to weigh against
+# dozens of duplicated entries.)
 
-# accounting for individual donations: summarizing based on each individual.
-# Creating a new column called name, based on the paste function; summarizing
-# receipts, and then looking for distinct names.
 
-individual_donations <- faculty_fec %>%
-  filter(contribution_receipt_amount != 0) %>%
+spending_by_individual <- faculty_fec %>%
   mutate(name = paste(last_name, ", ", first_name, sep = "")) %>%
   group_by(name, title, school, department) %>%
-  summarize(donations_sum = sum(contribution_receipt_amount)) %>%
+  summarize(spending_sum = sum(contribution_receipt_amount)) %>%
   ungroup() %>%
-  arrange(desc(donations_sum)) %>%
+  arrange(desc(spending_sum)) %>%
   distinct(name, .keep_all = T)
 
-mean_donation_donaters <- individual_donations %>%
-  summarize(mean_donation = mean(donations_sum))
+# finding the mean donation of all faculty members, regardless of if they
+# donated
+
+mean_spending_all <- mean(spending_by_individual$spending_sum)
+
+# filtering to only have those who actually donated
+
+spending_by_individual <- spending_by_individual %>%
+  filter(spending_sum != 0)
+
+# now grabbing mean of only those who donated.
+
+mean_spending_spenders <- mean(spending_by_individual$spending_sum)
 ```
 
-```{r recipients}
+# Individual Spending
+
+This is the display of all spending data from individuals
+```{r displayspenders, include = T}
+head(spending_by_individual)
+skimr::skim(spending_by_individual)
+```
+
+```{r recipientscommittees}
 
 # first, filtering by name and transaction number to ensure that we don't double
-# count people who are in two departments. Then, summarizing based on recieving
-# committee name.
+# count people who are in two departments. Then, summarizing based on receiving
+# committee name and arranging based on descending values of spending.
 
-donation_recipients <- faculty_fec %>%
+spending_recipients <- faculty_fec %>%
   mutate(name = paste(last_name, ", ", first_name, sep = "")) %>%
   distinct(name, pdf_url, .keep_all = T) %>%
   filter(contribution_receipt_amount != 0) %>%
   group_by(committee_name, committee_id) %>%
-  summarize(donations_sum = sum(contribution_receipt_amount)) %>%
-  arrange(desc(donations_sum))
+  summarize(spending_sum = sum(contribution_receipt_amount)) %>%
+  arrange(desc(spending_sum))
 
 
 # joining with committee table
 
-recipients_committees <- left_join(donation_recipients,
+spending_committees <- left_join(spending_recipients,
   committees,
   by = "committee_id"
 ) %>%
   select(-cmte_id, -cmte_nm)
 
+```
 
+# Recipient Overview
+
+After summarizing based on committee names and joining with committee, we have a nice overview of spending to each committee.
+
+```{r viewrecipientsoverview, include = T}
+head(spending_committees)
+```
+
+```{r}
 # grouping by party and summarizing
 
 parties <- recipients_committees %>%
