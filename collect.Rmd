@@ -299,49 +299,73 @@ ggplot(spending_over_time, aes(x = month, y = donations)) +
 ```
 
 ```{r GRSmodel}
+
+# creating a dataframe for us to work with as we explore gender, race, school
+
 gender_race_school_data <- faculty_fec %>%
   mutate(name = paste(last_name, ", ", first_name, sep = "")) %>%
   group_by(name, title, school, gender, race) %>%
-  summarize(donations_sum = sum(contribution_receipt_amount)) %>%
+  summarize(spending_sum = sum(contribution_receipt_amount)) %>%
   ungroup() %>%
-  arrange(desc(donations_sum)) %>%
+  arrange(desc(spending_sum)) %>%
   distinct(name, school, .keep_all = T)
 
-gender_breakdown <- gender_race_school_data %>%
+# creating breakdowns for each of our 3 variables
+
+uni_gender_breakdown <- gender_race_school_data %>%
   group_by(gender) %>%
-  summarize(mean_donation = mean(donations_sum))
+  summarize(mean_spending = mean(spending_sum))
 
-race_breakdown <- gender_race_school_data %>%
+uni_race_breakdown <- gender_race_school_data %>%
   group_by(race) %>%
-  summarize(mean_donation = mean(donations_sum))
+  summarize(mean_spending = mean(spending_sum))
 
-school_breakdown <- gender_race_school_data %>%
+uni_school_breakdown <- gender_race_school_data %>%
   group_by(school) %>%
-  summarize(mean_donation = mean(donations_sum)) %>%
-  arrange(desc(mean_donation))
+  summarize(mean_spending = mean(spending_sum)) %>%
+  arrange(desc(mean_spending))
+
+# checking to see if race and gender interact
 
 race_gender_breakdown <- gender_race_school_data %>%
   group_by(race, gender) %>%
-  summarize(mean_donation = mean(donations_sum)) %>%
+  summarize(mean_donation = mean(spending_sum)) %>%
   arrange(desc(mean_donation))
 
+# visualization of these differences
+
 ggplot(gender_race_school_data, aes(
-  x = race, y = donations_sum, color = gender
+  x = race, y = spending_sum, color = gender
 )) +
   geom_jitter(width = .25, height = .1) +
   scale_y_continuous(labels = scales::dollar)
 
 ggplot(gender_race_school_data, aes(
-  x = school, y = donations_sum, color = gender
+  x = school, y = spending_sum, color = gender
 )) +
   geom_jitter(width = .25, height = .1) +
-  scale_y_continuous(labels = scales::dollar)
+  scale_y_continuous(labels = scales::dollar) +
+  theme_classic() 
+
+# creating a linear model for gender, race, and school, with one interaction term
 
 gender_race_school_model <- lm(
-  donations_sum ~ gender * race + school,
+  spending_sum ~ gender * race + school,
   gender_race_school_data
-) %>%
-  tidy(conf.int = T)
+) 
+
+# creating data for our model
+
+school_model_data <- data.frame(gender = "M", school = "HLS", race = "White")
+
+# using the output 
+
+school_model_output <- predict(
+  gender_race_school_model, 
+  school_model_data, 
+  se.fit = TRUE)
+
+school_model_output[3]
 ```
 
 ```{r subjects}
