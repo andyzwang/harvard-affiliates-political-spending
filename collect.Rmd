@@ -190,7 +190,7 @@ spending_recipients <- faculty_fec %>%
 spending_committees <- left_join(spending_recipients,
   committees,
   by = "committee_id"
-) 
+)
 ```
 
 # Recipient Overview
@@ -213,12 +213,14 @@ parties <- spending_committees %>%
   arrange(desc(total_spending))
 
 ggplot(parties, aes(x = party, y = total_spending)) +
-  geom_col(fill = "lightblue") + 
+  geom_col(fill = "lightblue") +
   theme_classic() +
   scale_y_continuous(labels = scales::dollar_format()) +
-  labs(title = "Faculty Spendings to Each Party",
-       x = "Party",
-       y = "Sum of Spendings")
+  labs(
+    title = "Faculty Spendings to Each Party",
+    x = "Party",
+    y = "Sum of Spendings"
+  )
 ```
 ```{r individual_donations_party, include = T}
 
@@ -227,8 +229,10 @@ ggplot(parties, aes(x = party, y = total_spending)) +
 individual_donations_party <- faculty_fec %>%
   filter(contribution_receipt_amount != 0) %>%
   left_join(committees, by = "committee_id") %>%
-  mutate(name = paste(last_name, ", ", first_name, sep = ""),
-         party = cmte_pty_affiliation) %>%
+  mutate(
+    name = paste(last_name, ", ", first_name, sep = ""),
+    party = cmte_pty_affiliation
+  ) %>%
   group_by(name, title, school, department, party) %>%
   summarize(spending_sum = sum(contribution_receipt_amount)) %>%
   ungroup() %>%
@@ -239,6 +243,8 @@ individual_donations_party <- faculty_fec %>%
 head(individual_donations_party)
 skimr::skim(individual_donations_party)
 ```
+
+# Geographic Distibution of Spending
 
 ```{r heatmap}
 # summarizing by states
@@ -262,6 +268,8 @@ plot_usmap(data = states, values = "total_spending") +
     subtitle = "Using FEC Data from 2017-2020"
   )
 ```
+
+# Spending Over Time
 
 ```{r overtime}
 
@@ -287,7 +295,7 @@ ggplot(spending_over_time, aes(x = month, y = donations)) +
     title = "Total Harvard Political Spending Per Month"
   ) +
   theme_classic() +
-  scale_y_continuous(label = scales::dollar) 
+  scale_y_continuous(label = scales::dollar)
 ```
 
 ```{r GRSmodel}
@@ -298,9 +306,6 @@ gender_race_school_data <- faculty_fec %>%
   ungroup() %>%
   arrange(desc(donations_sum)) %>%
   distinct(name, school, .keep_all = T)
-
-mean_donation_all <- gender_race_school_data %>%
-  summarize(mean_donation = mean(donations_sum))
 
 gender_breakdown <- gender_race_school_data %>%
   group_by(gender) %>%
