@@ -11,6 +11,7 @@ library(ggthemes)
 library(broom)
 library(tidyverse)
 library(DT)
+library(shinyWidgets)
 
 # import the main data set from separate file to minimize clutter.
 
@@ -45,18 +46,18 @@ ui <- navbarPage(
     ),
     column(1)
   ),
-  
+
   # third panel: breakdown of the recipients of Harvard spending
-  
+
   tabPanel(
     "Spending Recipients",
-    
+
     # Using subtabs at the top
-    
+
     tabsetPanel(
-      
+
       # Tab one: receipient overview
-      
+
       tabPanel(
         "Recipients Overview",
         h2("Recipient Overview"),
@@ -68,9 +69,9 @@ ui <- navbarPage(
         ),
         column(1)
       ),
-      
+
       # tab two: the political parties
-      
+
       tabPanel(
         "Political Parties",
         h2("Political Parties"),
@@ -82,44 +83,44 @@ ui <- navbarPage(
         ),
         column(1)
       ),
-      
+
       # Tab three: party spending breakdown
-      
+
       tabPanel(
         "Party Spending Breakdown",
         h2("Party Spending Breakdown"),
         p("As evidenced by the individual party spending breakdown, Harvard faculty very much strongly prefer spending money on Democratic candidates and organizations. However, this table is very much incomplete: some partisan organizations do not register as such with the FEC, and as such, faculty who have spent on these organizations are not reflected in this chart."),
         sidebarLayout(
-          
+
           # sidebar for selecting party
-          
+
           sidebarPanel(
             selectInput(
               "party_spending_party",
               "Select A Party",
               c(
-                "Democratic" = "dem",
-                "Republican" = "gop",
-                "Democratic-Farmer-Labor" = "dfl",
-                "Independent" = "ind",
-                "Libertarian" = "lib"
+                "Democratic" = "DEM",
+                "Republican" = "REP",
+                "Democratic-Farmer-Labor" = "DFL",
+                "Independent" = "IND",
+                "Libertarian" = "LAB"
               )
             )
           ),
           mainPanel(DTOutput("party_breakdown"))
         )
       ),
-      
+
       # Tab four: geographic spending
-      
+
       tabPanel(
         "Geographic Spending",
         h2("Geographic Spending"),
         p("The political spending of Harvard faculty is dispersed throughout the entire continential U.S., but is seemed to be concentrated in a few key states: California, Illinois, Texas, and Massachusetts. Note that ActBlue has its headquarters in Mass, which significantly distorts the map. Select a region to get a better sense of spending within each region."),
         sidebarLayout(
-          
+
           # sidebar for selecting region
-          
+
           sidebarPanel(
             selectInput(
               "region_selection",
@@ -140,9 +141,9 @@ ui <- navbarPage(
           mainPanel(plotOutput("states"))
         )
       ),
-      
+
       # tab five: donations over time
-      
+
       tabPanel(
         "Spending Over Time",
         h2("Spending Over Time"),
@@ -156,14 +157,115 @@ ui <- navbarPage(
       )
     )
   ),
+
+  # four: modelling spending behavior
+
   tabPanel(
     "Modelling Spending",
-    titlePanel("About"),
-    h3("Project Background and Motivations"),
-    p("Hello, this is where I talk about my project."),
-    h3("About Me"),
-    p("My name is ______ and I study ______. 
-             You can reach me at ______@college.harvard.edu.")
+
+    # Using subtabs at the top
+
+    tabsetPanel(
+
+      # Tab one: model overview
+
+      tabPanel(
+        "Model Overview",
+        h2("Model Overview"),
+        p("I sought to build a model to help model the differences in donation behavior across the 12 schools of Harvard. Before I began, though, I first examined my data and looked to see which variables would have a large impact on donations: namely, race, gender, and school."),
+        p("I also wanted to examine if the variables of race and gender would also act on each other to become interactive variables."),
+        h4("Variable Examination"),
+        column(
+          4,
+          gt_output("uni_gender")
+        ),
+        column(
+          4,
+          gt_output("uni_race")
+        ),
+        column(
+          4,
+          gt_output("uni_race_gender")
+        )
+      ),
+
+      tabPanel(
+        "By School",
+        h2("Modeling Behavior By School"),
+        sidebarLayout(
+          sidebarPanel(
+            p("This data allows you to plot how the three variables interact with each other within the university's different schools."),
+
+            # pick which axis and color variables for scatterplot
+
+            pickerInput(
+              inputId = "school_plot_variables",
+              label = "Choose A Plot",
+              choices = c(
+                "Race Vs Gender",
+                "Gender Vs Race",
+                "School Vs Race",
+                "School Vs Gender"
+              ),
+              multiple = F,
+              selected = "race"
+            ),
+
+            p(strong("Predict a Professor's Political Spendings")),
+            p("Configure a professor of your choosing, and our model will estimate how much they're likely to spend in the same time period on political contributions."),
+
+            # picker input for make your professor
+
+            pickerInput(
+              inputId = "school_race",
+              label = "Choose A Race",
+              choices = c(
+                "White",
+                "African American",
+                "Asian"
+              ),
+              multiple = F,
+              selected = "White"
+            ),
+            pickerInput(
+              inputId = "school_gender",
+              label = "Choose A Gender",
+              choices = c(
+                "Male" = "M",
+                "Female" = "F"
+              ),
+              multiple = F,
+              selected = "Male"
+            ),
+            pickerInput(
+              inputId = "school_school",
+              label = "Choose A School",
+              choices = c(
+                "Harvard Dental School" = "DENT",
+                "Faculty of Arts and Sciences" = "FAS",
+                "Graduate School of Design" = "GSD",
+                "Graduate School of Education" = "GSE",
+                "Harvard Business School" = "HBS",
+                "Harvard Kennedy school" = "HKS",
+                "Harvard Law School" = "HLS",
+                "Harvard Medical School" = "HMS",
+                "Harvard School of Public Health" = "HSPH",
+                "Radcliffe" = "RAD",
+                "School of Engineering and Applied Sciences" = "SEAS",
+                "University (Prof and Admin)" = "UNI"
+              ),
+              multiple = F,
+              selected = "HLS"
+            ),
+          ),
+          mainPanel(
+            h3("Plot Display"),
+            plotOutput("school_plot"),
+            verbatimTextOutput("school_model_text")
+          )
+        )
+      )
+    )
   ),
   tabPanel(
     "Faculty Diversity",
@@ -233,26 +335,8 @@ server <- function(input, output, session) {
 
     # setting the filter depending on what the input is
 
-    if (input$party_spending_party == "dem") {
-      donations_party_render <- individual_donations_party %>%
-        filter(Party == "DEM")
-    }
-    else if (input$party_spending_party == "gop") {
-      donations_party_render <- individual_donations_party %>%
-        filter(Party == "REP")
-    }
-    else if (input$party_spending_party == "dfl") {
-      donations_party_render <- individual_donations_party %>%
-        filter(Party == "DFL")
-    }
-    else if (input$party_spending_party == "ind") {
-      donations_party_render <- individual_donations_party %>%
-        filter(Party == "IND")
-    }
-    else if (input$party_spending_party == "lib") {
-      donations_party_render <- individual_donations_party %>%
-        filter(Party == "LIB")
-    }
+    donations_party_render <- individual_donations_party %>%
+      filter(Party == input$party_spending_party)
 
     datatable(donations_party_render,
       options = list(
@@ -348,9 +432,9 @@ server <- function(input, output, session) {
         subtitle = "Using FEC Data from 2017-2020"
       )
   })
-  
+
   # rendering a ggplot of spending over time
-  
+
   output$spending_over_time <- renderPlot({
     ggplot(spending_over_time, aes(x = month, y = donations)) +
       geom_line() +
@@ -360,7 +444,126 @@ server <- function(input, output, session) {
         title = "Total Harvard Political Spending Per Month"
       ) +
       theme_classic() +
-      scale_y_continuous(label = scales::dollar) 
+      scale_y_continuous(label = scales::dollar)
+  })
+
+  # including source for FAS model
+
+  source("fas_model.R")
+
+  # run the three breakdowns
+
+  output$uni_gender <- render_gt({
+    uni_gender_breakdown %>%
+      gt() %>%
+      tab_header(title = "Mean Spending by Gender") %>%
+      cols_label(
+        gender = "Gender",
+        mean_spending = "Mean Spending"
+      ) %>%
+      fmt_currency(columns = vars(mean_spending))
+  })
+
+  output$uni_race <- render_gt({
+    uni_race_breakdown %>%
+      gt() %>%
+      tab_header(title = "Mean Spending by Race") %>%
+      cols_label(
+        race = "Race",
+        mean_spending = "Mean Spending"
+      ) %>%
+      fmt_currency(columns = vars(mean_spending))
+  })
+  output$uni_school <- render_gt({
+    uni_school_breakdown %>%
+      gt() %>%
+      tab_header(title = "Mean Spending by School") %>%
+      cols_label(
+        school = "School Affiliation",
+        mean_spending = "Mean Spending"
+      ) %>%
+      fmt_currency(columns = vars(mean_spending))
+  })
+
+  # making gt for race and gender correlation
+
+  output$uni_race_gender <- render_gt({
+    uni_race_gender_breakdown %>%
+      gt() %>%
+      tab_header(title = "Mean Spending by Race, Gender") %>%
+      cols_label(
+        race = "Race",
+        gender = "Gender",
+        mean_spending = "Mean Spending"
+      ) %>%
+      fmt_currency(columns = vars(mean_spending))
+  })
+
+  output$school_plot <- renderPlot({
+    if (input$school_plot_variables == "Gender Vs Race") {
+      school_plot_base <- ggplot(gender_race_school_data, aes(
+        x = gender, y = spending_sum, color = race
+      ))
+    }
+    else if (input$school_plot_variables == "School Vs Race") {
+      school_plot_base <- ggplot(gender_race_school_data, aes(
+        x = school, y = spending_sum, color = race
+      ))
+    }
+    else if (input$school_plot_variables == "Race Vs Gender") {
+      school_plot_base <- ggplot(gender_race_school_data, aes(
+        x = race, y = spending_sum, color = gender
+      ))
+    }
+    else if (input$school_plot_variables == "School Vs Gender") {
+      school_plot_base <- ggplot(gender_race_school_data, aes(
+        x = school, y = spending_sum, color = gender
+      ))
+    }
+    school_plot_base +
+      geom_jitter(width = .25, height = .1) +
+      scale_y_continuous(labels = scales::dollar) +
+      theme_classic() +
+      labs(
+        title = str_to_title(
+          paste("Political Spending:", input$school_plot_variables)
+        ),
+        y = "Sum of Political Spending Per Person"
+      )
+  })
+
+  # working on the school plot "black box" output
+
+  output$school_model_text <- renderText({
+
+    # creating a data frame with out inputs
+
+    school_model_data <- data.frame(
+      gender = input$school_gender,
+      school = input$school_school,
+      race = input$school_race
+    )
+
+    # using the output
+
+    school_model_output <- predict(gender_race_school_model,
+      school_model_data,
+      se.fit = TRUE
+    )
+
+    paste("A professor that is ",
+      gender = input$school_gender,
+      " and ",
+      input$school_race,
+      " working at ",
+      input$school_school,
+      " is predicted to have donated\n",
+      scales::dollar(as.numeric(school_model_output[1])),
+      " with a standard error of ",
+      scales::dollar(as.numeric(school_model_output[2])),
+      ".",
+      sep = ""
+    )
   })
 }
 
