@@ -298,6 +298,8 @@ ggplot(spending_over_time, aes(x = month, y = donations)) +
   scale_y_continuous(label = scales::dollar)
 ```
 
+# Working with a University-Wide Model
+
 ```{r GRSmodel}
 
 # creating a dataframe for us to work with as we explore gender, race, school
@@ -332,7 +334,19 @@ race_gender_breakdown <- gender_race_school_data %>%
   summarize(mean_donation = mean(spending_sum)) %>%
   arrange(desc(mean_donation))
 
+```
+
+```{r unimodelvis, include = T}
 # visualization of these differences
+
+# printing major breakdown tables
+
+uni_gender_breakdown
+uni_race_breakdown
+uni_school_breakdown
+race_gender_breakdown
+
+# graphing some major variables against each other
 
 ggplot(gender_race_school_data, aes(
   x = race, y = spending_sum, color = gender
@@ -346,7 +360,9 @@ ggplot(gender_race_school_data, aes(
   geom_jitter(width = .25, height = .1) +
   scale_y_continuous(labels = scales::dollar) +
   theme_classic() 
+```
 
+```{r unimodel}
 # creating a linear model for gender, race, and school, with one interaction term
 
 gender_race_school_model <- lm(
@@ -364,8 +380,6 @@ school_model_output <- predict(
   gender_race_school_model, 
   school_model_data, 
   se.fit = TRUE)
-
-school_model_output[3]
 ```
 
 ```{r subjects}
