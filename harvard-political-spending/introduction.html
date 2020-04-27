@@ -1,5 +1,26 @@
 <div class="col-sm-9">
   <h2>Introduction</h2>
+  <p>
+    Harvard enjoys the position of being one of the most renowned universities in the world, both for its academic status and its prestige in society. Its faculty, spread across 12 constituent schools, teach over 20 thousand students a year, including nearly 7 thousand undergraduate and 14 thousand graduate students.
+  </p>
+  <p>
+    But as Dean of the College Khurana reminds incoming first years, <i>Harvard's contributions mostly takes place outside of the classroom</i>. Therefore, it's also no secret that Harvard faculty and staff have a disproportionate amount of impact in the American political system. Faculty of Harvard include Lawrence Summers and Samantha Powers, Director of the National Economic Council Ambassador to the United Nations under Obama, among others. As an institution, Harvard has produced 8 U.S. Presidents, the most of any institution in the U.S.
+  </p>
+  <p>
+    The old saying goes: <i>money speaks</i>. The goal of this project is to use political spending data from the FEC to analyze patterns of political spending amongst Harvard faculty between the years 2017-2020. I hope to shed light on where Harvard faculty choose to spend their money politically, as well as analyze and characterize differences in spending behavior among the faculty. Using data visualization and statistical analysis, I hope to provide commentary on the data that I have aquired.
+  </p>
+  <p>
+    There are also a few aspects of the data set to clarify before any analysis is done:
+  </p>
+  <p>
+    First, this data set combines Federal Elections Commission individual contribution and committees data with a dataset of Harvard faculty. However, given that there is no pre-made data set of Harvard faculty, I used Harvard's Faculty Finder website, as well as individual department and constituent school websites, to create a listing of nearly 2,400 faculty members. Anyone who was listed in the "Primary Faculty" portion of a department's faculty listing is included in my dataset, though there are still large departments missing, primarily from the Medical School. 
+  </p>
+  <p>
+    Second, I manually assigned the variables of gender and race based off of photos of faculty. Although an imperfect method, Harvard releases diversity data in the aggregate, making analysis on these two variables nearly impossible. The other alternative could have been to use gender and race approximation packages, but I felt that manual analysis may be more accurate. I also opted to use the U.S. Census' 5 race categories, simplified into just three: White American, Black or African American, and Asian American.
+  </p>
+  <p>
+    Finally, many faculty members are affiliated with multiple departments or schools. In those cases, I included their data twice, or however times needed. However, when analyzing categories as an aggregate, I made sure to remove duplicated instances to not affect the totals and means of the category In other words, a FAS professor in both AAAS and ENG is factored into both for departmental breakdowns, but counted only once for FAS-wide aggregates. 
+  </p>
 </div>
 <div class="col-sm-3">
   <img src = "https://images.unsplash.com/photo-1581202286187-64f87d65283b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" width = "100%">
