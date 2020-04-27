@@ -6,7 +6,10 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+
+# bringing in required libraries
+
+knitr::opts_chunk$set(echo = FALSE)
 library(stringr)
 library(janitor)
 library(ggplot2)
@@ -18,18 +21,18 @@ library(tidyverse)
 library(gt)
 ```
 
-```{r importdata}
+```{r importdata, errors = F, warning=F}
 
 # importing the data from the faculty, as well as reading in the correct column
 # types.
 
-faculty <- read_csv("raw-data/faculty.csv", col_types = "ccffcc") %>%
+faculty <- read_csv("harvard-political-spending/raw-data/faculty.csv", col_types = "ccffcc") %>%
   clean_names()
 
 # reading in the FEC data (using a bulk search on the term "harvard", filtering
 # for years from 2017 - 2020, including the correct column types)
 
-fec <- read_csv("raw-data/fec1720.csv",
+fec <- read_csv("harvard-political-spending/raw-data/fec1720.csv",
   col_types = "ccicdccicffcccccccccccccciccccccccTddcccccccccccccccccccccccfcccccccccdcccccccc"
 )
 
@@ -89,11 +92,11 @@ fec <- fec %>%
   select(last_name, first_name, everything())
 ```
 
-```{r committeesdata}
+```{r committeesdata, error=F, message=F}
 # importing FEC committees data, cleaning up names and changing up column names
 # to be consistent with other data set for easy join later.
 
-committees <- read_delim("raw-data/committees1920.txt",
+committees <- read_delim("harvard-political-spending/raw-data/committees1920.txt",
   "|",
   escape_double = FALSE, col_names = TRUE,
   trim_ws = TRUE
@@ -102,8 +105,7 @@ committees <- read_delim("raw-data/committees1920.txt",
   mutate(committee_id = cmte_id)
 ```
 
-```{r joining}
-
+```{r joining, error=F, message=F}
 # created the master of all tables with this data, merging on first and last.
 # Also using coalesce function to replace all NA amounts in contributions to 0
 # (to make for accurate averages later).
@@ -114,7 +116,20 @@ faculty_fec <- left_join(faculty, fec,
   mutate(contribution_receipt_amount = coalesce(contribution_receipt_amount, 0))
 ```
 
+# Faculty and their FEC Donations
+
+This is the result after I have joined together the faculty information and the FEC donations data.
+
+```{r displayfaculty_fec, include = T}
+# using head and skim to give an overview of the data.
+
+head(faculty_fec)
+skimr::skim(faculty_fec)
+```
+
+
 ```{r individualdonations}
+# HERE
 
 # accounting for individual donations: summarizing based on each individual.
 # Creating a new column called name, based on the paste function; summarizing
