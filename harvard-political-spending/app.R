@@ -27,7 +27,7 @@ ui <- navbarPage(
 
   tabPanel(
     "Introduction",
-    titlePanel("Introduction"),
+    includeHTML("introduction.html")
   ),
   tabPanel(
     "Faculty Spending",
