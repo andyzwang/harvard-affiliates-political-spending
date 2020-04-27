@@ -2,9 +2,17 @@
 
 library(shiny)
 library(shinythemes)
+library(stringr)
+library(janitor)
+library(ggplot2)
+library(usmap)
+library(lubridate)
+library(ggthemes)
+library(broom)
 library(tidyverse)
 
 # import the main data set 
+
 
 # define overall ui with navbar
 
