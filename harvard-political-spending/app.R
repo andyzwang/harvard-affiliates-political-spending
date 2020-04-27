@@ -11,6 +11,7 @@ library(ggthemes)
 library(broom)
 library(tidyverse)
 library(DT)
+library(gt)
 library(shinyWidgets)
 
 # import the main data set from separate file to minimize clutter.
@@ -167,37 +168,17 @@ ui <- navbarPage(
 
     tabsetPanel(
 
-      # Tab one: model overview
-
-      tabPanel(
-        "Model Overview",
-        h2("Model Overview"),
-        p("I sought to build a model to help model the differences in donation behavior across the 12 schools of Harvard. Before I began, though, I first examined my data and looked to see which variables would have a large impact on donations: namely, race, gender, and school."),
-        p("I also wanted to examine if the variables of race and gender would also act on each other to become interactive variables."),
-        h4("Variable Examination"),
-        column(
-          4,
-          gt_output("uni_gender")
-        ),
-        column(
-          4,
-          gt_output("uni_race")
-        ),
-        column(
-          4,
-          gt_output("uni_race_gender")
-        )
-      ),
-
+      # Tab one: model by school
+      
       tabPanel(
         "By School",
         h2("Modeling Behavior By School"),
         sidebarLayout(
           sidebarPanel(
             p("This data allows you to plot how the three variables interact with each other within the university's different schools."),
-
+            
             # pick which axis and color variables for scatterplot
-
+            
             pickerInput(
               inputId = "school_plot_variables",
               label = "Choose A Plot",
@@ -210,12 +191,12 @@ ui <- navbarPage(
               multiple = F,
               selected = "race"
             ),
-
+            
             p(strong("Predict a Professor's Political Spendings")),
             p("Configure a professor of your choosing, and our model will estimate how much they're likely to spend in the same time period on political contributions."),
-
+            
             # picker input for make your professor
-
+            
             pickerInput(
               inputId = "school_race",
               label = "Choose A Race",
@@ -258,24 +239,44 @@ ui <- navbarPage(
               selected = "HLS"
             ),
           ),
+          
+          # display both the scatterplot as well as the output
+          
           mainPanel(
             h3("Plot Display"),
             plotOutput("school_plot"),
-            verbatimTextOutput("school_model_text")
+            verbatimTextOutput("school_model_text"),
+            p("Model created by linear regression of three categorical variables, with interaction term between race and gender.")
           )
+        )
+      ),
+      
+      # tab two: overview
+      
+      tabPanel(
+        "Model Overview",
+        h2("Model Overview"),
+        p("I sought to build a model to help model the differences in donation behavior across the 12 schools of Harvard. Before I began, though, I first examined my data and looked to see which variables would have a large impact on donations: namely, race, gender, and school."),
+        p("I also wanted to examine if the variables of race and gender would also act on each other to become interactive variables."),
+        h4("Variable Examination"),
+        column(
+          4,
+          gt_output("uni_gender")
+        ),
+        column(
+          4,
+          gt_output("uni_race")
+        ),
+        column(
+          4,
+          gt_output("uni_race_gender")
         )
       )
     )
   ),
-  tabPanel(
-    "Faculty Diversity",
-    titlePanel("Diversity in the Faculty"),
-    h3("Project Background and Motivations"),
-    p("Hello, this is where I talk about my project."),
-    h3("About Me"),
-    p("My name is ______ and I study ______. 
-             You can reach me at ______@college.harvard.edu.")
-  ),
+  
+  #last tab - self promo
+  
   tabPanel(
     "About",
     includeHTML("about.html")
