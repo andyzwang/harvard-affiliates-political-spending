@@ -10,6 +10,7 @@ library(lubridate)
 library(ggthemes)
 library(broom)
 library(tidyverse)
+library(DT)
 
 # import the main data set from separate file to minimize clutter.
 
@@ -29,20 +30,23 @@ ui <- navbarPage(
     "Introduction",
     includeHTML("introduction.html")
   ),
+
+  # second tap: top spenders
+
   tabPanel(
-    "Faculty Spending",
-    titlePanel("Discussion Title"),
-    p("Tour of the modeling choices you made and 
-              an explanation of why you made them")
+    "Top Spenders",
+    titlePanel("Top Faculty Spenders"),
+    p("Here's an aggregation of the sums of political spending by each individual faculty member from January 2017 until now."),
+    p("The average spending across all faculty is", strong("$791.27"), "while the average spending for only those who spend is", strong("$2,896.57.")),
+    DTOutput("individualspending")
   ),
   tabPanel(
     "Spending Recipients",
-    titlePanel("About"),
-    h3("Project Background and Motivations"),
-    p("Hello, this is where I talk about my project."),
-    h3("About Me"),
-    p("My name is ______ and I study ______. 
-             You can reach me at ______@college.harvard.edu.")
+    tabsetPanel(
+      tabPanel("Recipients Overview"),
+      p("Here"),
+      DTOutput("recipient_overview")
+    )
   ),
   tabPanel(
     "Who Did My Professor Donate To?",
@@ -54,7 +58,7 @@ ui <- navbarPage(
              You can reach me at ______@college.harvard.edu.")
   ),
   tabPanel(
-    "Modelling Donation Behavior",
+    "Modelling Spending Behavior",
     titlePanel("About"),
     h3("Project Background and Motivations"),
     p("Hello, this is where I talk about my project."),
@@ -75,31 +79,56 @@ ui <- navbarPage(
     "About",
     includeHTML("about.html")
   )
-  
 )
 
 # Define server logic required to draw a histogram
-server <- function(input, output) {
-  output$line_plot <- renderPlot({
-    # Generate type based on input$plot_type from ui
-    
-    ifelse(
-      input$plot_type == "a",
-      
-      # If input$plot_type is "a", plot histogram of "waiting" column 
-      # from the faithful dataframe
-      
-      x   <- faithful[, 2],
-      
-      # If input$plot_type is "b", plot histogram of "eruptions" column
-      # from the faithful dataframe
-      
-      x   <- faithful[, 1]
-    )
-    
-    # Draw the histogram with the specified number of bins
-    
-    hist(x, col = 'darkgray', border = 'white')
+server <- function(input, output, session) {
+
+  # importing data source for top_spenders
+
+  source("top_spenders.R")
+
+  # rendering a data table based off of spending_by_individual, formatting to
+  # have spending displayed as a dollar.
+
+  output$individualspending <- renderDataTable({
+    datatable(spending_by_individual,
+      options = list(
+        colnames = c(
+          "Name",
+          "Title",
+          "School",
+          "Department",
+          "Total Spending"
+        ),
+        pageLength = 20
+      )
+    ) %>%
+      formatCurrency("spending_sum", "$")
+  })
+
+  # including recipients data source
+
+  source("recipients.R")
+
+  # rendering a data table based off of spending_recipients, formatting to
+  # have spending displayed as a dollar.
+
+  output$recipient_overview <- renderDataTable({
+    datatable(spending_recipients_ui,
+      options = list(
+        colnames = c(
+          "Committee Name",
+          "Spending Sum",
+          "Address",
+          "City",
+          "State",
+          "Party Affiliation"
+        ),
+        pageLength = 20
+      )
+    ) %>%
+      formatCurrency("spending_sum", "$")
   })
 }
 
