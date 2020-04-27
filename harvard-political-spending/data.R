@@ -70,9 +70,18 @@ fec <- fec %>%
 # to be consistent with other data set for easy join later.
 
 committees <- read_delim("raw-data/committees1920.txt",
-                         "|",
-                         escape_double = FALSE, col_names = TRUE,
-                         trim_ws = TRUE
+  "|",
+  escape_double = FALSE, col_names = TRUE,
+  trim_ws = TRUE
 ) %>%
   clean_names() %>%
   mutate(committee_id = cmte_id)
+
+# created the master of all tables with this data, merging on first and last.
+# Also using coalesce function to replace all NA amounts in contributions to 0
+# (to make for accurate averages later).
+
+faculty_fec <- left_join(faculty, fec,
+  by = c("first_name", "last_name")
+) %>%
+  mutate(contribution_receipt_amount = coalesce(contribution_receipt_amount, 0))
