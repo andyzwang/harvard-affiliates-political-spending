@@ -13,6 +13,7 @@ library(tidyverse)
 library(DT)
 library(gt)
 library(shinyWidgets)
+library(plotly)
 
 # import the main data set from separate file to minimize clutter.
 
@@ -76,11 +77,11 @@ ui <- navbarPage(
       tabPanel(
         "Political Parties",
         h2("Political Parties"),
-        p("Harvard faculty very strongly prefer spending money on Democratic candidates and organizations. Note: the Party count is not completely accurate, due to some partisan organizations with significant amounts of spending (i.e. ActBlue) not registering as partisan with the FEC."),
+        p("Harvard faculty very strongly prefer spending money on Democratic candidates and organizations. Note: the party count is not completely accurate, due to some partisan organizations with significant amounts of spending (i.e. ActBlue) not registering as partisan with the FEC."),
         column(1),
         column(
           10,
-          plotOutput("party_spending")
+          plotlyOutput("party_spending")
         ),
         column(1)
       ),
@@ -104,7 +105,7 @@ ui <- navbarPage(
                 "Republican" = "REP",
                 "Democratic-Farmer-Labor" = "DFL",
                 "Independent" = "IND",
-                "Libertarian" = "LAB"
+                "Libertarian" = "LIB"
               )
             )
           ),
@@ -139,7 +140,7 @@ ui <- navbarPage(
               )
             )
           ),
-          mainPanel(plotOutput("states"))
+          mainPanel(plotlyOutput("states"))
         )
       ),
 
@@ -152,7 +153,7 @@ ui <- navbarPage(
         column(1),
         column(
           10,
-          plotOutput("spending_over_time")
+          plotlyOutput("spending_over_time")
         ),
         column(1)
       )
@@ -319,8 +320,8 @@ server <- function(input, output, session) {
   })
 
   # rendering a ggplot of party spending
-  output$party_spending <- renderPlot({
-    ggplot(parties, aes(x = party, y = total_spending)) +
+  output$party_spending <- renderPlotly({
+    party_spending_plot <- ggplot(parties, aes(x = party, y = total_spending)) +
       geom_col(fill = "lightblue") +
       theme_classic() +
       scale_y_continuous(labels = scales::dollar) +
@@ -329,6 +330,7 @@ server <- function(input, output, session) {
         x = "Party",
         y = "Sum of Spendings"
       )
+    ggplotly(party_spending_plot)
   })
 
   # render an adjustable table of party donations (responsive to input)
@@ -349,7 +351,7 @@ server <- function(input, output, session) {
 
   # creating a map of spending data
 
-  output$states <- renderPlot({
+  output$states <- renderPlotly({
 
     # setting the region depending on what the input is
 
@@ -422,7 +424,7 @@ server <- function(input, output, session) {
 
     # plot final map
 
-    region_map +
+    region_map <- region_map +
       scale_fill_continuous(
         low = "white", high = "blue",
         name = "Dollars Spent", label = scales::dollar
@@ -432,12 +434,13 @@ server <- function(input, output, session) {
         title = "States Recieving Harvard Political Spending",
         subtitle = "Using FEC Data from 2017-2020"
       )
+    ggplotly(region_map)
   })
 
   # rendering a ggplot of spending over time
 
-  output$spending_over_time <- renderPlot({
-    ggplot(spending_over_time, aes(x = month, y = donations)) +
+  output$spending_over_time <- renderPlotly({
+    time_plot <- ggplot(spending_over_time, aes(x = month, y = donations)) +
       geom_line() +
       labs(
         x = "Date",
@@ -446,6 +449,7 @@ server <- function(input, output, session) {
       ) +
       theme_classic() +
       scale_y_continuous(label = scales::dollar)
+    ggplotly(time_plot)
   })
 
   # including source for FAS model
