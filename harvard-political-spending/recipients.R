@@ -98,4 +98,9 @@ spending_over_time <- faculty_fec %>%
   mutate(month = floor_date(contribution_receipt_date, "month")) %>%
   filter(!is.na(contribution_receipt_amount)) %>%
   group_by(month) %>%
-  summarize(donations = sum(contribution_receipt_amount))
+  summarize(spending = sum(contribution_receipt_amount)) %>%
+  mutate(cycle = case_when(
+    month <= "2018-11-01" ~ 2018,
+    month > "2018-11-01" ~ 2020,
+  )) %>%
+  filter(!is.na(cycle))
