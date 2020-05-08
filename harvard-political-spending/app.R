@@ -168,7 +168,41 @@ ui <- navbarPage(
     # Using subtabs at the top
 
     tabsetPanel(
-
+      
+      # first tab panel: exploratory data analysis
+      
+      tabPanel(
+        "Demographic Exploration",
+        h2("Data Exploration by Demographic"),
+        sidebarLayout(
+          sidebarPanel(
+            p("This data allows you to plot how the three variables interact with each other within the university's different schools."),
+            
+            # pick which axis and color variables for scatterplot
+            
+            pickerInput(
+              inputId = "dem_plot_variables",
+              label = "Choose A Plot",
+              choices = c(
+                "Race Vs Gender Scatterplot",
+                "Gender Vs Race Scatterplot"
+              ),
+              multiple = F
+            ),
+            p("I wanted to examine if the variables of race and gender would also act on each other to become interactive variables. Given the large differences by both race, gender, and the interaction thereof, I concluded that I should model for the interaction of these terms."),
+            gt_output("uni_race_gender")
+          ),
+          
+          # display both the scatterplot as well as the output
+          
+          mainPanel(
+            h3("Plot Display"),
+            plotlyOutput("dem_plot"),
+          )
+        )
+      ),
+          
+          
       # Tab one: model by school
       
       tabPanel(
@@ -184,17 +218,15 @@ ui <- navbarPage(
               inputId = "school_plot_variables",
               label = "Choose A Plot",
               choices = c(
-                "Race Vs Gender",
-                "Gender Vs Race",
                 "School Vs Race",
                 "School Vs Gender"
               ),
               multiple = F,
-              selected = "race"
+              selected = "School Vs Race"
             ),
             
             p(strong("Predict a Professor's Political Spendings")),
-            p("Configure a professor of your choosing, and our model will estimate how much they're likely to spend in the same time period on political contributions."),
+            p("Configure a professor of your choosing, and our model will estimate how much they're likely to spend in the same time period (2017-2020) on political contributions."),
             
             # picker input for make your professor
             
@@ -228,7 +260,7 @@ ui <- navbarPage(
                 "Graduate School of Design" = "GSD",
                 "Graduate School of Education" = "GSE",
                 "Harvard Business School" = "HBS",
-                "Harvard Kennedy school" = "HKS",
+                "Harvard Kennedy School" = "HKS",
                 "Harvard Law School" = "HLS",
                 "Harvard Medical School" = "HMS",
                 "Harvard School of Public Health" = "HSPH",
@@ -245,32 +277,10 @@ ui <- navbarPage(
           
           mainPanel(
             h3("Plot Display"),
-            plotOutput("school_plot"),
+            plotlyOutput("school_plot"),
             verbatimTextOutput("school_model_text"),
             p("Model created by linear regression of three categorical variables, with interaction term between race and gender.")
           )
-        )
-      ),
-      
-      # tab two: overview
-      
-      tabPanel(
-        "Model Overview",
-        h2("Model Overview"),
-        p("I sought to build a model to help model the differences in donation behavior across the 12 schools of Harvard. Before I began, though, I first examined my data and looked to see which variables would have a large impact on donations: namely, race, gender, and school."),
-        p("I also wanted to examine if the variables of race and gender would also act on each other to become interactive variables."),
-        h4("Variable Examination"),
-        column(
-          4,
-          gt_output("uni_gender")
-        ),
-        column(
-          4,
-          gt_output("uni_race")
-        ),
-        column(
-          4,
-          gt_output("uni_race_gender")
         )
       )
     )
@@ -440,55 +450,23 @@ server <- function(input, output, session) {
   # rendering a ggplot of spending over time
 
   output$spending_over_time <- renderPlotly({
-    time_plot <- ggplot(spending_over_time, aes(x = month, y = donations)) +
+    time_plot <- ggplot(spending_over_time, aes(x = month, y = spending, color = as.factor(cycle))) +
       geom_line() +
       labs(
         x = "Date",
         y = "Total Spending",
-        title = "Total Harvard Political Spending Per Month"
+        title = "Total Harvard Political Spending Per Month",
+        color = "Cycle"
       ) +
       theme_classic() +
-      scale_y_continuous(label = scales::dollar)
+      scale_y_continuous(label = scales::dollar) +
+      geom_smooth(method = "glm", se = FALSE)
     ggplotly(time_plot)
   })
 
   # including source for FAS model
 
-  source("fas_model.R")
-
-  # run the three breakdowns
-
-  output$uni_gender <- render_gt({
-    uni_gender_breakdown %>%
-      gt() %>%
-      tab_header(title = "Mean Spending by Gender") %>%
-      cols_label(
-        gender = "Gender",
-        mean_spending = "Mean Spending"
-      ) %>%
-      fmt_currency(columns = vars(mean_spending))
-  })
-
-  output$uni_race <- render_gt({
-    uni_race_breakdown %>%
-      gt() %>%
-      tab_header(title = "Mean Spending by Race") %>%
-      cols_label(
-        race = "Race",
-        mean_spending = "Mean Spending"
-      ) %>%
-      fmt_currency(columns = vars(mean_spending))
-  })
-  output$uni_school <- render_gt({
-    uni_school_breakdown %>%
-      gt() %>%
-      tab_header(title = "Mean Spending by School") %>%
-      cols_label(
-        school = "School Affiliation",
-        mean_spending = "Mean Spending"
-      ) %>%
-      fmt_currency(columns = vars(mean_spending))
-  })
+  source("models.R")
 
   # making gt for race and gender correlation
 
@@ -504,28 +482,18 @@ server <- function(input, output, session) {
       fmt_currency(columns = vars(mean_spending))
   })
 
-  output$school_plot <- renderPlot({
-    if (input$school_plot_variables == "Gender Vs Race") {
-      school_plot_base <- ggplot(gender_race_school_data, aes(
+  output$dem_plot <- renderPlotly({
+    if (input$dem_plot_variables == "Gender Vs Race Scatterplot") {
+      dem_plot_base <- ggplot(gender_race_school_data, aes(
         x = gender, y = spending_sum, color = race
       ))
     }
-    else if (input$school_plot_variables == "School Vs Race") {
-      school_plot_base <- ggplot(gender_race_school_data, aes(
-        x = school, y = spending_sum, color = race
-      ))
-    }
-    else if (input$school_plot_variables == "Race Vs Gender") {
-      school_plot_base <- ggplot(gender_race_school_data, aes(
+    else if (input$dem_plot_variables == "Race Vs Gender Scatterplot") {
+      dem_plot_base <- ggplot(gender_race_school_data, aes(
         x = race, y = spending_sum, color = gender
       ))
     }
-    else if (input$school_plot_variables == "School Vs Gender") {
-      school_plot_base <- ggplot(gender_race_school_data, aes(
-        x = school, y = spending_sum, color = gender
-      ))
-    }
-    school_plot_base +
+    dem_plot_base <- dem_plot_base +
       geom_jitter(width = .25, height = .1) +
       scale_y_continuous(labels = scales::dollar) +
       theme_classic() +
@@ -535,7 +503,35 @@ server <- function(input, output, session) {
         ),
         y = "Sum of Political Spending Per Person"
       )
-  })
+    
+    ggplotly(dem_plot_base)
+  }
+  )
+  
+output$school_plot <- renderPlotly({
+  if (input$school_plot_variables == "School Vs Race") {
+    school_plot_basic <- ggplot(gender_race_school_data, aes(
+      x = school, y = spending_sum, color = race
+    ))
+  }
+  else if (input$school_plot_variables == "School Vs Gender") {
+    school_plot_basic <- ggplot(gender_race_school_data, aes(
+      x = school, y = spending_sum, color = gender
+    ))
+  }
+  school_plotly <- school_plot_basic +
+    geom_jitter(width = .25, height = .1) +
+    scale_y_continuous(labels = scales::dollar) +
+    theme_classic() +
+    labs(
+      title = str_to_title(
+        paste("Political Spending:", input$school_plot_variables)
+      ),
+      y = "Sum of Political Spending Per Person"
+    )
+
+  ggplotly(school_plotly)
+})
 
   # working on the school plot "black box" output
 
@@ -564,7 +560,7 @@ server <- function(input, output, session) {
       input$school_school,
       " is predicted to have donated\n",
       scales::dollar(as.numeric(school_model_output[1])),
-      " with a standard error of ",
+      ", with a standard error of ",
       scales::dollar(as.numeric(school_model_output[2])),
       ".",
       sep = ""
