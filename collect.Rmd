@@ -283,22 +283,42 @@ spending_over_time <- faculty_fec %>%
   mutate(month = floor_date(contribution_receipt_date, "month")) %>%
   filter(!is.na(contribution_receipt_amount)) %>%
   group_by(month) %>%
-  summarize(donations = sum(contribution_receipt_amount))
+  summarize(spending = sum(contribution_receipt_amount)) %>%
+  mutate(cycle = case_when(
+    month <= "2018-11-01" ~ 2018,
+    month > "2018-11-01" ~ 2020,
+  )) %>%
+  filter(!is.na(cycle))
 
 # plotting donations over time with ggplot
 
-ggplot(spending_over_time, aes(x = month, y = donations)) +
+ggplot(spending_over_time, aes(x = month, y = spending, color = as.factor(cycle))) +
   geom_line() +
   labs(
     x = "Date",
     y = "Total Spending",
-    title = "Total Harvard Political Spending Per Month"
+    title = "Total Harvard Political Spending Per Month",
+    color = "Election Cycle"
   ) +
   theme_classic() +
-  scale_y_continuous(label = scales::dollar)
+  scale_y_continuous(label = scales::dollar) +
+  geom_smooth(method = "glm", se = FALSE)
 ```
 
 # Working with a University-Wide Model
+
+```{r demographics}
+# creating data frame to do demographics data exploration
+
+race_gender_data <- faculty_fec %>%
+  mutate(name = paste(last_name, ", ", first_name, sep = "")) %>%
+  group_by(name, title, gender, race) %>%
+  summarize(spending_sum = sum(contribution_receipt_amount)) %>%
+  ungroup() %>%
+  arrange(desc(spending_sum)) %>%
+  distinct(name, .keep_all = T) 
+
+```
 
 ```{r GRSmodel}
 
@@ -333,6 +353,7 @@ race_gender_breakdown <- gender_race_school_data %>%
   group_by(race, gender) %>%
   summarize(mean_donation = mean(spending_sum)) %>%
   arrange(desc(mean_donation))
+
 
 ```
 
