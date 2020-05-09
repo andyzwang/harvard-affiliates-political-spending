@@ -84,4 +84,6 @@ committees <- read_delim("raw-data/committees1920.txt",
 faculty_fec <- left_join(faculty, fec,
   by = c("first_name", "last_name")
 ) %>%
-  mutate(contribution_receipt_amount = coalesce(contribution_receipt_amount, 0))
+  mutate(contribution_receipt_amount = coalesce(
+    contribution_receipt_amount, 0
+  ))
