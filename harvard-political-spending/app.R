@@ -615,7 +615,7 @@ server <- function(input, output, session) {
   # making gt for race and gender correlation
 
   output$uni_race_gender <- render_gt({
-    uni_race_gender_breakdown %>%
+    race_gender_breakdown %>%
       gt() %>%
       tab_header(title = "Mean Spending by Race, Gender") %>%
       cols_label(
