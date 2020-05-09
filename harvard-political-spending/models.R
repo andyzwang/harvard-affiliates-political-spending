@@ -18,7 +18,8 @@ race_gender_data_hist <- race_gender_data %>%
 race_gender_breakdown <- race_gender_data %>%
   group_by(race, gender) %>%
   summarize(mean_spending = mean(spending_sum)) %>%
-  arrange(desc(mean_spending))
+  arrange(desc(mean_spending)) %>%
+  ungroup()
 
 
 # creating a dataframe for us to work with as we explore gender, race, school
