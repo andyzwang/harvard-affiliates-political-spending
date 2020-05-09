@@ -305,7 +305,7 @@ ggplot(spending_over_time, aes(x = month, y = spending, color = as.factor(cycle)
   geom_smooth(method = "glm", se = FALSE)
 ```
 
-# Working with a University-Wide Model
+# University-Wide Demographics
 
 ```{r demographics}
 # creating data frame to do demographics data exploration
@@ -318,9 +318,59 @@ race_gender_data <- faculty_fec %>%
   arrange(desc(spending_sum)) %>%
   distinct(name, .keep_all = T) 
 
+# checking to see variable differences
+
+uni_gender_breakdown <- race_gender_data %>%
+  group_by(gender) %>%
+  summarize(mean_spending = mean(spending_sum))
+
+uni_race_breakdown <- race_gender_data %>%
+  group_by(race) %>%
+  summarize(mean_spending = mean(spending_sum))
+
+# checking to see if race and gender interact
+
+race_gender_breakdown <- race_gender_data %>%
+  group_by(race, gender) %>%
+  summarize(mean_donation = mean(spending_sum)) %>%
+  arrange(desc(mean_donation))
+
+```
+```{r demographicsprint, include = T}
+# printing major breakdown tables
+
+uni_gender_breakdown
+uni_race_breakdown
+race_gender_breakdown
+
+# graphing some major variables against each other
+
+ggplot(race_gender_data, aes(
+  x = race, y = spending_sum, color = gender
+)) +
+  geom_jitter(width = .25, height = .1) +
+  scale_y_continuous(labels = scales::dollar)
+
+ggplot(race_gender_data, aes(
+  x = gender, y = spending_sum, color = race
+)) +
+  geom_jitter(width = .25, height = .1) +
+  scale_y_continuous(labels = scales::dollar)
+```
+```{r histogram, include = T}
+race_gender_data_hist <- race_gender_data %>%
+  mutate(demographic = paste(paste(gender, race))) %>%
+  filter(spending_sum != 0) %>%
+  filter(spending_sum < 10000)
+
+ggplot(race_gender_data_hist, aes(x = spending_sum, fill = demographic)) +
+  geom_histogram(bins = 100) 
+
 ```
 
-```{r GRSmodel}
+# University-Wide Schools Model
+
+```{r GRSmodel, include = T}
 
 # creating a dataframe for us to work with as we explore gender, race, school
 
@@ -334,49 +384,26 @@ gender_race_school_data <- faculty_fec %>%
 
 # creating breakdowns for each of our 3 variables
 
-uni_gender_breakdown <- gender_race_school_data %>%
-  group_by(gender) %>%
-  summarize(mean_spending = mean(spending_sum))
-
-uni_race_breakdown <- gender_race_school_data %>%
-  group_by(race) %>%
-  summarize(mean_spending = mean(spending_sum))
-
 uni_school_breakdown <- gender_race_school_data %>%
   group_by(school) %>%
   summarize(mean_spending = mean(spending_sum)) %>%
   arrange(desc(mean_spending))
 
-# checking to see if race and gender interact
-
-race_gender_breakdown <- gender_race_school_data %>%
-  group_by(race, gender) %>%
-  summarize(mean_donation = mean(spending_sum)) %>%
-  arrange(desc(mean_donation))
-
-
+uni_school_breakdown
 ```
 
 ```{r unimodelvis, include = T}
 # visualization of these differences
 
-# printing major breakdown tables
-
-uni_gender_breakdown
-uni_race_breakdown
-uni_school_breakdown
-race_gender_breakdown
-
-# graphing some major variables against each other
-
-ggplot(gender_race_school_data, aes(
-  x = race, y = spending_sum, color = gender
-)) +
-  geom_jitter(width = .25, height = .1) +
-  scale_y_continuous(labels = scales::dollar)
-
 ggplot(gender_race_school_data, aes(
   x = school, y = spending_sum, color = gender
+)) +
+  geom_jitter(width = .25, height = .1) +
+  scale_y_continuous(labels = scales::dollar) +
+  theme_classic() 
+
+ggplot(gender_race_school_data, aes(
+  x = school, y = spending_sum, color = race
 )) +
   geom_jitter(width = .25, height = .1) +
   scale_y_continuous(labels = scales::dollar) +
@@ -403,54 +430,101 @@ school_model_output <- predict(
   se.fit = TRUE)
 ```
 
-```{r subjects}
-subject_field_data <- faculty_fec %>%
+# Cross-Subject Models (Within FAS)
+
+```{r subjects, include = T}
+
+# creating "subjects" field within FAS & SEAS.
+
+gender_race_subject_data <- faculty_fec %>%
   mutate(name = paste(last_name, ", ", first_name, sep = "")) %>%
   filter(school %in% c("FAS", "SEAS")) %>%
   group_by(name, title, school, gender, race, department) %>%
-  summarize(donations_sum = sum(contribution_receipt_amount)) %>%
+  summarize(spending_sum = sum(contribution_receipt_amount)) %>%
   ungroup() %>%
-  arrange(desc(donations_sum)) %>%
+  arrange(desc(spending_sum)) %>%
   mutate(field = case_when(
     school == "SEAS" ~ "Engineering",
-    department %in% c("AAAS", "ANTHRO", "ECON", "GOV", "HIST", "PSCH", "SOCSTUD", "SOCIO", "WGS") ~ "Social Sciences",
-    department %in% c("ASTRO", "CHEM", "EPS", "HISTSCI", "HEBIO", "MATH", "MCBIO", "OEBIO", "PHY", "STAT", "STRBIO", "ESPP") ~ "Math/Science",
-    department %in% c("CELTIC", "CLASSICS", "COMPLIT", "EALC", "ENG", "FOLKMYTH", "GERM", "HISTLIT", "HAA", "LING", "MUSIC", "NELC", "PHIL", "RELI", "ROMANCE", "SLAV", "SAS") ~ "Humanities",
+    department %in% c(
+      "AAAS",
+      "ANTHRO",
+      "ECON", 
+      "GOV", 
+      "HIST", 
+      "PSCH", 
+      "SOCSTUD", 
+      "SOCIO", 
+      "WGS"
+    ) ~ "Social Sciences",
+    department %in% c(
+      "ASTRO",
+      "CHEM",
+      "EPS", 
+      "HISTSCI", 
+      "HEBIO", 
+      "MATH", 
+      "MCBIO",
+      "OEBIO", 
+      "PHY", 
+      "STAT",
+      "STRBIO", 
+      "ESPP"
+    ) ~ "Math/Science",
+    department %in% c(
+      "CELTIC",
+      "CLASSICS",
+      "COMPLIT",
+      "EALC", 
+      "ENG", 
+      "FOLKMYTH", 
+      "GERM", 
+      "HISTLIT", 
+      "HAA", 
+      "LING", 
+      "MUSIC", 
+      "NELC", 
+      "PHIL", 
+      "RELI", 
+      "ROMANCE", 
+      "SLAV", 
+      "SAS"
+    ) ~ "Humanities",
     department == "ADMIN" ~ "Admin"
-  ))
-
-department_spending <- subject_field_data %>%
-  distinct(name, department, .keep_all = T) %>%
-  group_by(department) %>%
-  summarize(mean_donation = mean(donations_sum))
-
-ggplot(department_spending, aes(x = department, y = mean_donation)) +
-  geom_col() +
-  coord_flip()
-
-ggplot(subject_field_data, aes(x = department, y = donations_sum, color = gender)) +
-  geom_jitter(width = .1, height = .25) +
-  coord_flip() +
-  scale_y_log10(labels = scales::dollar)
-
-subject_spending <- subject_field_data %>%
+  )) %>%
   distinct(name, field, .keep_all = T)
 
-ggplot(subject_spending, aes(x = field, y = donations_sum, color = gender)) +
+# GG plot to show where spending is per subject
+
+ggplot(gender_race_subject_data, aes(x = field, y = spending_sum, color = gender)) +
   geom_jitter(width = .1, height = .25) +
   coord_flip() +
   scale_y_log10(labels = scales::dollar)
 
-spending_by_subject <- subject_spending %>%
+# table to see the average spending per subject
+
+spending_by_subject <- gender_race_subject_data %>%
   group_by(field) %>%
-  summarize(mean_spending = mean(donations_sum)) %>%
+  summarize(mean_spending = mean(spending_sum)) %>%
   arrange(desc(mean_spending))
 
-field_race_gender_model <- lm(
-  donations_sum ~ gender * race + field,
-  subject_spending
+spending_by_subject
+
+# getting model
+
+subject_race_gender_model <- lm(
+  spending_sum ~ gender * race + field,
+  gender_race_subject_data
 ) %>%
   tidy(conf.int = T)
+```
+
+
+```{r spendingbydepartment, include = T}
+ggplot(gender_race_subject_data, aes(x = department, y = spending_sum, color = gender)) +
+  geom_jitter(width = .1, height = .25) +
+  coord_flip() +
+  scale_y_log10(labels = scales::dollar)
+
 ```
 
 ```{r diversity}
