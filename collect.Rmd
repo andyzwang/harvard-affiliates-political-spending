@@ -27,7 +27,8 @@ library(DT)
 # importing the data from the faculty, as well as reading in the correct column
 # types.
 
-faculty <- read_csv("harvard-political-spending/raw-data/faculty.csv", col_types = "ccffcc") %>%
+faculty <- read_csv("harvard-political-spending/raw-data/faculty.csv", 
+                    col_types = "ccffcc") %>%
   clean_names()
 
 # reading in the FEC data (using a bulk search on the term "harvard", filtering
@@ -224,7 +225,9 @@ ggplot(parties, aes(x = party, y = total_spending)) +
 ```
 ```{r individual_donations_party, include = T}
 
-# joining tables of individual donations with committee information, to be able to sort by party. group together by party, name, title, etc, and then summarize.
+# joining tables of individual donations with committee information, to be able
+# to sort by party. group together by party, name, title, etc, and then
+# summarize.
 
 individual_donations_party <- faculty_fec %>%
   filter(contribution_receipt_amount != 0) %>%
@@ -292,7 +295,9 @@ spending_over_time <- faculty_fec %>%
 
 # plotting donations over time with ggplot
 
-ggplot(spending_over_time, aes(x = month, y = spending, color = as.factor(cycle))) +
+ggplot(spending_over_time, aes(x = month, 
+                               y = spending, 
+                               color = as.factor(cycle))) +
   geom_line() +
   labs(
     x = "Date",
@@ -411,7 +416,8 @@ ggplot(gender_race_school_data, aes(
 ```
 
 ```{r unimodel}
-# creating a linear model for gender, race, and school, with one interaction term
+# creating a linear model for gender, race, and school, with one interaction
+# term
 
 gender_race_school_model <- lm(
   spending_sum ~ gender * race + school,
@@ -495,7 +501,9 @@ gender_race_subject_data <- faculty_fec %>%
 
 # GG plot to show where spending is per subject
 
-ggplot(gender_race_subject_data, aes(x = field, y = spending_sum, color = gender)) +
+ggplot(gender_race_subject_data, aes(x = field, 
+                                     y = spending_sum, 
+                                     color = gender)) +
   geom_jitter(width = .1, height = .25) +
   coord_flip() +
   scale_y_log10(labels = scales::dollar)
@@ -520,14 +528,20 @@ subject_race_gender_model <- lm(
 
 
 ```{r spendingbydepartment, include = T}
-ggplot(gender_race_subject_data, aes(x = department, y = spending_sum, color = gender)) +
+ggplot(gender_race_subject_data, aes(x = department, 
+                                     y = spending_sum, 
+                                     color = gender)) +
   geom_jitter(width = .1, height = .25) +
   coord_flip() +
   scale_y_log10(labels = scales::dollar)
 
 ```
 
-```{r diversity}
+```{r diversity, include = F}
+
+# I compiled some statistics about the diversity of Harvard faculty, just for
+# fun. This did not make it into the final project.
+
 diverse_faculty <- faculty_fec %>%
   mutate(name = paste(last_name, ", ", first_name, sep = "")) %>%
   mutate(white_man = case_when(
@@ -569,6 +583,8 @@ ggplot(donations_diversity_per_school, aes(x = non_white_percent, y = mean_donat
 ggplot(donations_diversity_per_school, aes(x = non_white_man_percent, y = mean_donation)) +
   geom_point() +
   geom_smooth(method = "glm", se = F)
+
+cor(donations_diversity_per_school$non_white_percent, donations_diversity_per_school$mean_donation)
 
 demographics_school <- diversity_donations_uni %>%
   mutate(
@@ -693,6 +709,8 @@ ggplot(donations_diversity_per_subject, aes(x = non_white_percent, y = mean_dona
 ggplot(donations_diversity_per_subject, aes(x = non_white_man_percent, y = mean_donation)) +
   geom_point() +
   geom_smooth(method = "glm", se = F)
+
+
 
 demographics_departments <- diversity_donations_fas %>%
   mutate(
