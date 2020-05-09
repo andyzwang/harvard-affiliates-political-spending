@@ -168,68 +168,94 @@ ui <- navbarPage(
     # Using subtabs at the top
 
     tabsetPanel(
-      
+
       # first tab panel: exploratory data analysis
-      
+
       tabPanel(
         "Demographic Exploration",
         h2("Data Exploration by Demographic"),
         sidebarLayout(
           sidebarPanel(
             p("This data allows you to plot how the three variables interact with each other within the university's different schools."),
-            
+
             # pick which axis and color variables for scatterplot
-            
+
             pickerInput(
               inputId = "dem_plot_variables",
               label = "Choose A Plot",
               choices = c(
                 "Race Vs Gender Scatterplot",
-                "Gender Vs Race Scatterplot"
+                "Gender Vs Race Scatterplot",
+                "Demographic Histogram",
+                "Race Histogram",
+                "Gender Histogram"
               ),
               multiple = F
             ),
             p("I wanted to examine if the variables of race and gender would also act on each other to become interactive variables. Given the large differences by both race, gender, and the interaction thereof, I concluded that I should model for the interaction of these terms."),
             gt_output("uni_race_gender")
           ),
-          
+
           # display both the scatterplot as well as the output
-          
+
           mainPanel(
             h3("Plot Display"),
             plotlyOutput("dem_plot"),
           )
         )
       ),
-          
-          
-      # Tab one: model by school
-      
+
+
+      # Tab two: model by school
+
       tabPanel(
         "By School",
         h2("Modeling Behavior By School"),
         sidebarLayout(
           sidebarPanel(
-            p("This data allows you to plot how the three variables interact with each other within the university's different schools."),
-            
-            # pick which axis and color variables for scatterplot
-            
+            p("Choose a variable to compare spending data by, within schools of your choice"),
+
+            # pick which color variables for scatterplot
+
             pickerInput(
               inputId = "school_plot_variables",
-              label = "Choose A Plot",
+              label = "Choose A Variable",
               choices = c(
-                "School Vs Race",
-                "School Vs Gender"
+                "Race" = "race",
+                "Gender" = "gender"
               ),
               multiple = F,
-              selected = "School Vs Race"
+              selected = "race"
             ),
-            
+
+            # select relevant schools
+
+            pickerInput(
+              inputId = "school_plot_schools",
+              label = "Choose Schools",
+              choices = c(
+                "Harvard Dental School" = "DENT",
+                "Faculty of Arts and Sciences" = "FAS",
+                "Graduate School of Design" = "GSD",
+                "Graduate School of Education" = "GSE",
+                "Harvard Business School" = "HBS",
+                "Harvard Kennedy School" = "HKS",
+                "Harvard Law School" = "HLS",
+                "Harvard Medical School" = "HMS",
+                "Harvard School of Public Health" = "HSPH",
+                "Radcliffe" = "RAD",
+                "School of Engineering and Applied Sciences" = "SEAS",
+                "University (Prof and Admin)" = "UNI"
+              ),
+              multiple = T,
+              selected = c("DENT", "FAS", "GSD", "GSE", "HBS", "HKS", "HLS", "HMS", "HSPH", "RAD", "SEAS", "UNI")
+            ),
+
             p(strong("Predict a Professor's Political Spendings")),
             p("Configure a professor of your choosing, and our model will estimate how much they're likely to spend in the same time period (2017-2020) on political contributions."),
-            
+
             # picker input for make your professor
-            
+
             pickerInput(
               inputId = "school_race",
               label = "Choose A Race",
@@ -272,9 +298,9 @@ ui <- navbarPage(
               selected = "HLS"
             ),
           ),
-          
+
           # display both the scatterplot as well as the output
-          
+
           mainPanel(
             h3("Plot Display"),
             plotlyOutput("school_plot"),
@@ -282,12 +308,108 @@ ui <- navbarPage(
             p("Model created by linear regression of three categorical variables, with interaction term between race and gender.")
           )
         )
+      ),
+
+      # tab three: subjects
+
+      tabPanel(
+        "By Subjects",
+        h2("Modeling Behavior By Subjects within FAS"),
+        sidebarLayout(
+          sidebarPanel(
+            p("Choose a variable to compare spending data by, within subjets of your choice"),
+
+            # pick which color variables for scatterplot
+
+            pickerInput(
+              inputId = "subject_plot_variables",
+              label = "Choose A Variable",
+              choices = c(
+                "Race" = "race",
+                "Gender" = "gender"
+              ),
+              multiple = F,
+              selected = "race"
+            ),
+
+            # select relevant schools
+
+            pickerInput(
+              inputId = "subject_plot_subjects",
+              label = "Choose Schools",
+              choices = c(
+                "Engineering",
+                "Social Sciences",
+                "Math/Science",
+                "Humanities",
+                "Admin"
+              ),
+              multiple = T,
+              selected = c(
+                "Engineering",
+                "Social Sciences",
+                "Math/Science",
+                "Humanities",
+                "Admin"
+              )
+            ),
+
+            p(strong("Predict a Professor's Political Spendings")),
+            p("Configure a professor of your choosing, and our model will estimate how much they're likely to spend in the same time period (2017-2020) on political contributions."),
+
+            # picker input for make your professor
+
+            pickerInput(
+              inputId = "subject_race",
+              label = "Choose A Race",
+              choices = c(
+                "White",
+                "African American",
+                "Asian"
+              ),
+              multiple = F,
+              selected = "White"
+            ),
+            pickerInput(
+              inputId = "subject_gender",
+              label = "Choose A Gender",
+              choices = c(
+                "Male" = "M",
+                "Female" = "F"
+              ),
+              multiple = F,
+              selected = "Male"
+            ),
+            pickerInput(
+              inputId = "subject_subject",
+              label = "Choose A School",
+              choices = c(
+                "Engineering",
+                "Social Sciences",
+                "Math/Science",
+                "Humanities",
+                "Admin"
+              ),
+              multiple = F,
+              selected = "Engineering"
+            ),
+          ),
+
+          # display both the scatterplot as well as the output
+
+          mainPanel(
+            h3("Plot Display"),
+            plotlyOutput("subject_plot"),
+            verbatimTextOutput("subject_model_text"),
+            p("Model created by linear regression of three categorical variables, with interaction term between race and gender.")
+          )
+        )
       )
     )
   ),
-  
-  #last tab - self promo
-  
+
+  # last tab - self promo
+
   tabPanel(
     "About",
     includeHTML("about.html")
@@ -483,55 +605,124 @@ server <- function(input, output, session) {
   })
 
   output$dem_plot <- renderPlotly({
+
+    # Gender and Race scatterplot
+
     if (input$dem_plot_variables == "Gender Vs Race Scatterplot") {
-      dem_plot_base <- ggplot(gender_race_school_data, aes(
+      dem_plotly <- ggplot(gender_race_school_data, aes(
         x = gender, y = spending_sum, color = race
-      ))
+      )) +
+        geom_jitter(width = .25, height = .1) +
+        scale_y_continuous(labels = scales::dollar) +
+        theme_classic() +
+        labs(
+          title = "Political Spending: Gender Vs Race",
+          y = "Sum of Political Spending Per Person",
+          color = "Race"
+        )
     }
+
+    # race and gender scatterplot
+
     else if (input$dem_plot_variables == "Race Vs Gender Scatterplot") {
-      dem_plot_base <- ggplot(gender_race_school_data, aes(
+      dem_plotly <- ggplot(gender_race_school_data, aes(
         x = race, y = spending_sum, color = gender
+      )) +
+        geom_jitter(width = .25, height = .1) +
+        scale_y_continuous(labels = scales::dollar) +
+        theme_classic() +
+        labs(
+          title = "Political Spending: Race Vs Gender",
+          y = "Sum of Political Spending Per Person",
+          color = "Gender"
+        )
+    }
+
+    # demographic histogram
+
+    else if (input$dem_plot_variables == "Demographic Histogram") {
+      dem_plotly <- ggplot(race_gender_data_hist, aes(
+        x = spending_sum,
+        fill = demographic
+      )) +
+        geom_histogram(bins = 100) +
+        theme_classic() +
+        scale_x_continuous(labels = scales::dollar) +
+        labs(
+          title = "Political Spending: Gender and Race",
+          x = "Individual Political Spending",
+          fill = "Demographic"
+        )
+    }
+
+    # race histogram
+
+    else if (input$dem_plot_variables == "Race Histogram") {
+      dem_plotly <- ggplot(race_gender_data_hist, aes(
+        x = spending_sum,
+        fill = race
+      )) +
+        geom_histogram(bins = 100) +
+        theme_classic() +
+        scale_x_continuous(labels = scales::dollar) +
+        labs(
+          title = "Political Spending: Race",
+          x = "Individual Political Spending",
+          fill = "Race"
+        )
+    }
+
+    # gender histogram
+
+    else if (input$dem_plot_variables == "Gender Histogram") {
+      dem_plotly <- ggplot(race_gender_data_hist, aes(
+        x = spending_sum,
+        fill = gender
+      )) +
+        geom_histogram(bins = 100) +
+        theme_classic() +
+        scale_x_continuous(labels = scales::dollar) +
+        labs(
+          title = "Political Spending: Gender",
+          x = "Individual Political Spending",
+          fill = "Gender"
+        )
+    }
+    ggplotly(dem_plotly)
+  })
+
+  output$school_plot <- renderPlotly({
+
+    # filtering for the schools listed
+
+    school_plotly_data <- gender_race_school_data %>%
+      filter(school %in% input$school_plot_schools)
+
+    # graph
+    if (input$school_plot_variables == "race") {
+      school_plotly <- ggplot(school_plotly_data, aes(
+        x = school, y = spending_sum, color = race
       ))
     }
-    dem_plot_base <- dem_plot_base +
+    else if (input$school_plot_variables == "gender") {
+      school_plotly <- ggplot(school_plotly_data, aes(
+        x = school, y = spending_sum, color = gender
+      ))
+    }
+
+    school_plotly <- school_plotly +
       geom_jitter(width = .25, height = .1) +
       scale_y_continuous(labels = scales::dollar) +
       theme_classic() +
       labs(
         title = str_to_title(
-          paste("Political Spending:", input$school_plot_variables)
+          paste("Political Spending by School,", input$school_plot_variables)
         ),
         y = "Sum of Political Spending Per Person"
       )
-    
-    ggplotly(dem_plot_base)
-  }
-  )
-  
-output$school_plot <- renderPlotly({
-  if (input$school_plot_variables == "School Vs Race") {
-    school_plot_basic <- ggplot(gender_race_school_data, aes(
-      x = school, y = spending_sum, color = race
-    ))
-  }
-  else if (input$school_plot_variables == "School Vs Gender") {
-    school_plot_basic <- ggplot(gender_race_school_data, aes(
-      x = school, y = spending_sum, color = gender
-    ))
-  }
-  school_plotly <- school_plot_basic +
-    geom_jitter(width = .25, height = .1) +
-    scale_y_continuous(labels = scales::dollar) +
-    theme_classic() +
-    labs(
-      title = str_to_title(
-        paste("Political Spending:", input$school_plot_variables)
-      ),
-      y = "Sum of Political Spending Per Person"
-    )
 
-  ggplotly(school_plotly)
-})
+    ggplotly(school_plotly)
+  })
 
   # working on the school plot "black box" output
 
@@ -562,6 +753,72 @@ output$school_plot <- renderPlotly({
       scales::dollar(as.numeric(school_model_output[1])),
       ", with a standard error of ",
       scales::dollar(as.numeric(school_model_output[2])),
+      ".",
+      sep = ""
+    )
+  })
+  output$subject_plot <- renderPlotly({
+
+    # filtering for the subjects listed
+
+    subject_plotly_data <- gender_race_subject_data %>%
+      filter(field %in% input$subject_plot_subjects)
+
+    # graph
+    if (input$subject_plot_variables == "race") {
+      subject_plotly <- ggplot(subject_plotly_data, aes(
+        x = field, y = spending_sum, color = race
+      ))
+    }
+    else if (input$subject_plot_variables == "gender") {
+      subject_plotly <- ggplot(subject_plotly_data, aes(
+        x = field, y = spending_sum, color = gender
+      ))
+    }
+
+    subject_plotly <- subject_plotly +
+      geom_jitter(width = .25, height = .1) +
+      scale_y_continuous(labels = scales::dollar) +
+      theme_classic() +
+      labs(
+        title = str_to_title(
+          paste("Political Spending by Subject,", input$subject_plot_variables)
+        ),
+        y = "Sum of Political Spending Per Person"
+      )
+
+    ggplotly(subject_plotly)
+  })
+
+  # working on the subject plot "black box" output
+
+  output$subject_model_text <- renderText({
+
+    # creating a data frame with out inputs
+
+    subject_model_data <- data.frame(
+      gender = input$subject_gender,
+      field = input$subject_subject,
+      race = input$subject_race
+    )
+
+    # using the output
+
+    subject_model_output <- predict(subject_race_gender_model,
+      subject_model_data,
+      se.fit = TRUE
+    )
+
+    paste("A professor that is ",
+      gender = input$subject_gender,
+      " and ",
+      input$subject_race,
+      " working in the ",
+      input$subject_subject,
+      " department is predicted to have donated\n",
+      scales::dollar(as.numeric(subject_model_output[1])),
+      ", with a standard error of ",
+      scales::dollar(as.numeric(subject_model_output[2])),
       ".",
       sep = ""
     )
