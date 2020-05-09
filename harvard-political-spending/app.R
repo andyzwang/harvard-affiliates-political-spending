@@ -40,7 +40,12 @@ ui <- navbarPage(
     "Top Spenders",
     titlePanel("Top Faculty Spenders"),
     p("Here's an aggregation of the sums of political spending by each individual faculty member from January 2017 until now."),
-    p("The average spending across all faculty is", strong("$791.27"), "while the average spending for only those who spend is", strong("$2,896.57.")),
+    p(
+      "The average spending across all faculty is",
+      strong("$791.27"),
+      "while the average spending for only those who spend is",
+      strong("$2,896.57.")
+    ),
     column(1),
     column(
       10,
@@ -248,7 +253,20 @@ ui <- navbarPage(
                 "University (Prof and Admin)" = "UNI"
               ),
               multiple = T,
-              selected = c("DENT", "FAS", "GSD", "GSE", "HBS", "HKS", "HLS", "HMS", "HSPH", "RAD", "SEAS", "UNI")
+              selected = c(
+                "DENT",
+                "FAS",
+                "GSD",
+                "GSE",
+                "HBS",
+                "HKS",
+                "HLS",
+                "HMS",
+                "HSPH",
+                "RAD",
+                "SEAS",
+                "UNI"
+              )
             ),
 
             p(strong("Predict a Professor's Political Spendings")),
@@ -572,7 +590,11 @@ server <- function(input, output, session) {
   # rendering a ggplot of spending over time
 
   output$spending_over_time <- renderPlotly({
-    time_plot <- ggplot(spending_over_time, aes(x = month, y = spending, color = as.factor(cycle))) +
+    time_plot <- ggplot(spending_over_time, aes(
+      x = month,
+      y = spending,
+      color = as.factor(cycle)
+    )) +
       geom_line() +
       labs(
         x = "Date",
